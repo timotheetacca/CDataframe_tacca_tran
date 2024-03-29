@@ -10,7 +10,8 @@ typedef struct {
     int logical_size;
 } COLUMN;
 
-int insert_value(COLUMN* column, int value);
 COLUMN* create_column(char* title);
+int insert_value(COLUMN* column, int value);
+void print_col(COLUMN *col);
 
 #endif

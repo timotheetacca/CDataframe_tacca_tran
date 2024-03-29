@@ -3,12 +3,9 @@
 
 int main() {
     COLUMN *mycol = create_column("My column");
+    insert_value(mycol, 52);
+    insert_value(mycol, 44);
+    insert_value(mycol, 15);
 
-    int val = 5;
-    if (insert_value(mycol, val))
-        printf("Value added successfully to my column\n");
-    else
-        printf("Error adding value to my column\n");
-
-    return 0;
+    print_col(mycol);
 }
