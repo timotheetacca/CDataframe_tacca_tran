@@ -13,5 +13,6 @@ int insert_value(COLUMN* column, int value);
 void delete_column(COLUMN **column);
 void print_col(COLUMN *col);
 int number_of_occurrences(COLUMN *column, int value);
+int number_at_position(COLUMN *column, int value);
 
 #endif

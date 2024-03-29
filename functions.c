@@ -46,11 +46,20 @@ void print_col(COLUMN *column){
 }
 
 int number_of_occurrences(COLUMN *column, int value){
-    int occurences=0;
+    int occurrences=0;
     for (int i=0; i<column->logical_size; i++){
         if (column->data[i]==value){
-            occurences++;
+            occurrences++;
         }
     }
-    return occurences;
+    return occurrences;
+}
+
+int number_at_position(COLUMN *column, int value){
+    if (value >= 0 && value < column->logical_size) {
+        return column->data[value];
+    } else {
+        // Returns -1 if the position is invalid
+        return -1;
+    }
 }
