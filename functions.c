@@ -44,3 +44,13 @@ void print_col(COLUMN *column){
         printf("[%d] %d\n", i, column->data[i]);
     }
 }
+
+int number_of_occurrences(COLUMN *column, int value){
+    int occurences=0;
+    for (int i=0; i<column->logical_size; i++){
+        if (column->data[i]==value){
+            occurences++;
+        }
+    }
+    return occurences;
+}
