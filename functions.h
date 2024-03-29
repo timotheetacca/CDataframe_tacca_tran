@@ -1,8 +1,6 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
-#define SIZE 256
-
 typedef struct {
     char* title;
     int* data;
@@ -12,6 +10,7 @@ typedef struct {
 
 COLUMN* create_column(char* title);
 int insert_value(COLUMN* column, int value);
+void delete_column(COLUMN **column);
 void print_col(COLUMN *col);
 
 #endif

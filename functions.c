@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "functions.h"
 #define REALLOC_SIZE 256
@@ -30,6 +31,12 @@ int insert_value(COLUMN* column, int value) {
     column->data[column->logical_size] = value;
     column->logical_size++;
     return 1;
+}
+
+void delete_column(COLUMN **column){
+    free((**column).data);
+    free(*column);
+    *column = NULL;
 }
 
 void print_col(COLUMN *column){
