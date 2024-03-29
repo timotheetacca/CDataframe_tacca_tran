@@ -4,4 +4,6 @@ project(CDataframe_tacca_tran C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(CDataframe_tacca_tran
-        main.c)
+        main.c
+        functions.h
+        functions.c)
