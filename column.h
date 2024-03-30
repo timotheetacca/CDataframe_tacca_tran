@@ -1,5 +1,5 @@
-#ifndef FUNCTIONS_H
-#define FUNCTIONS_H
+#ifndef COLUMN_H
+#define COLUMN_H
 
 typedef struct {
     char* title;
@@ -11,7 +11,7 @@ typedef struct {
 COLUMN* create_column(char* title);
 int insert_value(COLUMN* column, int value);
 void delete_column(COLUMN **column);
-void print_col(COLUMN *col);
+void print_col(COLUMN *column);
 int number_of_occurrences(COLUMN *column, int value);
 int number_at_position(COLUMN *column, int value);
 

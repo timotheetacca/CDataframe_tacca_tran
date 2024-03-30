@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "functions.h"
+#include "column.h"
 #define REALLOC_SIZE 256
 
 COLUMN* create_column(char* title) {
@@ -26,7 +26,6 @@ int insert_value(COLUMN* column, int value) {
         column->data = new_data;
         column->physical_size = new_physical_size;
     }
-
     // Insert the value into the column
     column->data[column->logical_size] = value;
     column->logical_size++;
@@ -63,3 +62,8 @@ int number_at_position(COLUMN *column, int value){
         return -1;
     }
 }
+
+
+
+
+

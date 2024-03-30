@@ -5,5 +5,7 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(CDataframe_tacca_tran
         main.c
-        functions.h
-        functions.c)
+        column.h
+        column.c
+        CDataframe.c
+        CDataframe.h)
