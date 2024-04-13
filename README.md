@@ -24,4 +24,6 @@
 * ~~Display the number of cells equal to x (*x given as parameter*)~~
 * ~~Display the number of cells containing a value greater than x (*x given as a parameter*)~~              
 * ~~Display the number of cells containing a value less than x (*x given as parameter*)~~
- (*the last 3 were made in a single function*)
+  
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
