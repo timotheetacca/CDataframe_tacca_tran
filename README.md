@@ -22,5 +22,6 @@
 * ~~Display the number of rows~~
 * ~~Display the number of columns~~
 * ~~Display the number of cells equal to x (*x given as parameter*)~~
-* ~~Display the number of cells containing a value greater than x (*x given as a parameter*)~~                 (*the last 3 were made in a single function*)
+* ~~Display the number of cells containing a value greater than x (*x given as a parameter*)~~              
 * ~~Display the number of cells containing a value less than x (*x given as parameter*)~~
+ (*the last 3 were made in a single function*)
