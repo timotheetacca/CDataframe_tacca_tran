@@ -17,5 +17,12 @@ int main() {
     display_limited_rows_cdataframe(cdataframe, 2, 3);
     display_limited_columns_cdataframe(cdataframe, 2, 3);
 
+    display_number_of_rows(cdataframe);
+    display_number_of_columns(cdataframe);
+    printf("%d\n", count_cells_condition(cdataframe, 1, '='));
+    printf("%d\n", count_cells_condition(cdataframe, 4, '>'));
+    printf("%d\n", count_cells_condition(cdataframe, 4, '<'));
+
     return 0;
 }
+

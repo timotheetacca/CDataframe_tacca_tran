@@ -89,3 +89,43 @@ void display_limited_columns_cdataframe(CDATAFRAME* cdataframe, int start, int e
     }
 }
 
+
+void display_number_of_rows(CDATAFRAME* cdataframe) {
+    printf("Number of rows: %d\n", cdataframe->number_rows);
+}
+
+
+void display_number_of_columns(CDATAFRAME* cdataframe) {
+    printf("Number of columns: %d\n", cdataframe->number_columns);
+}
+
+int count_cells_condition(CDATAFRAME* cdataframe, int x, char op) {
+    int count = 0;
+    for (int i = 0; i < cdataframe->number_columns; i++) {
+        for (int j = 0; j < cdataframe->columns[i]->logical_size; j++) {
+            switch (op) {
+                case '=':
+                    if (cdataframe->columns[i]->data[j] == x) {
+                        count++;
+                    }
+                    break;
+                case '>':
+                    if (cdataframe->columns[i]->data[j] > x) {
+                        count++;
+                    }
+                    break;
+                case '<':
+                    if (cdataframe->columns[i]->data[j] < x) {
+                        count++;
+                    }
+                    break;
+                default:
+                    printf("Invalid comparison symbol\n");
+                    return -1;
+            }
+        }
+    }
+    return count;
+}
+
+
