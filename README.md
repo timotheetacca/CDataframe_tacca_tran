@@ -19,8 +19,11 @@
 * Display column names
 
 ## 4. Analysis and statistics
-* Display the number of rows
-* Display the number of columns
-* Display the number of cells equal to x (*x given as parameter*)
-* Display the number of cells containing a value greater than x (*x given as a parameter*)
-* Display the number of cells containing a value less than x (*x given as parameter*)
+* ~~Display the number of rows~~
+* ~~Display the number of columns~~
+* ~~Display the number of cells equal to x (*x given as parameter*)~~
+* ~~Display the number of cells containing a value greater than x (*x given as a parameter*)~~              
+* ~~Display the number of cells containing a value less than x (*x given as parameter*)~~
+  
+> [!NOTE]
+> The last 3 functions were made in a single one that takes in parameter the comparison symbol
