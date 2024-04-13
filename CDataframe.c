@@ -23,8 +23,6 @@ CDATAFRAME* create_cdataframe() {
 
 
 void fill_cdataframe(CDATAFRAME* cdataframe) {
-    char title[100];
-
     printf("Enter the size of the data frame:");
     scanf(" %d", &cdataframe->number_columns);
 
@@ -38,12 +36,16 @@ void fill_cdataframe(CDATAFRAME* cdataframe) {
         }
 
         for (int i = 0; i < cdataframe->number_columns; i++) {
-            printf("Enter the title of column %d:", i + 1);
+            // Allocate and stores the column title
+            char *title = (char *) malloc(sizeof(char) * 100);
+            printf("Enter the title of column %d:", i );
             scanf(" %s", title);
             COLUMN* column = create_column(title);
+
             for (int j = 0; j < cdataframe->number_rows; j++) {
                 int value;
-                printf("Enter the element of column %s at position %d:", title, j + 1);
+                // scanf each vvalue of the column
+                printf("Enter the element of column %s at position %d:", title, j);
                 scanf("%d", &value);
                 insert_value(column, value);
             }
@@ -59,3 +61,31 @@ void display_cdataframe(CDATAFRAME* cdataframe){
         print_col(cdataframe->columns[i]);
     }
 }
+
+
+void display_limited_rows_cdataframe(CDATAFRAME* cdataframe, int start, int end) {
+    if (start < 0 || start >= cdataframe->number_rows || end < 0 || end >= cdataframe->number_rows || start > end) {
+        printf("Invalid range\n");
+        return;
+    }
+    for (int i = 0; i < cdataframe->number_columns; i++) {
+        printf("%s \n", cdataframe->columns[i]->title);
+        for (int j = start; j <= end; j++) {
+            if (j < cdataframe->columns[i]->logical_size) {
+                printf("[%d] %d\n", j, cdataframe->columns[i]->data[j]);
+            }
+        }
+    }
+}
+
+void display_limited_columns_cdataframe(CDATAFRAME* cdataframe, int start, int end) {
+    if (start < 0 || start >= cdataframe->number_columns || end < 0 || end >= cdataframe->number_columns || start > end) {
+        printf("Invalid range\n");
+        return;
+    }
+    for (int i = start; i <= end; i++) {
+        printf("%s \n", cdataframe->columns[i]->title);
+        print_col(cdataframe->columns[i]);
+    }
+}
+

@@ -14,5 +14,8 @@ int main() {
     fill_cdataframe(cdataframe);
     display_cdataframe(cdataframe);
 
+    display_limited_rows_cdataframe(cdataframe, 2, 3);
+    display_limited_columns_cdataframe(cdataframe, 2, 3);
+
     return 0;
 }
