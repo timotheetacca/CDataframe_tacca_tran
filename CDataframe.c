@@ -158,3 +158,15 @@ void rename_column(CDATAFRAME* cdataframe, int column, char* new_title) {
 }
 
 
+int check_if_value_exists(CDATAFRAME* cdataframe, int value) {
+    // Returns 1 if the value exist in the CDataframe, else returns -1
+    for (int i = 0; i < cdataframe->number_columns; i++) {
+        for (int j = 0; j < cdataframe->columns[i]->logical_size; j++) {
+            if (cdataframe->columns[i]->data[j] == value) {
+                return 1;
+            }
+        }
+    }
+    return -1;
+}
+

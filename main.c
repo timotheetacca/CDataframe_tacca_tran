@@ -24,9 +24,14 @@ int main() {
     printf("%d\n", count_cells_condition(cdataframe, 1, '='));
     printf("%d\n", count_cells_condition(cdataframe, 4, '>'));
     printf("%d\n", count_cells_condition(cdataframe, 4, '<'));
+
     rename_column(cdataframe, 0, "Col1");
+
     add_row_to_cdataframe(cdataframe);
     display_cdataframe(cdataframe);
+
+    printf("%d\n", check_if_value_exists(cdataframe, 1));
+    printf("%d\n", check_if_value_exists(cdataframe, 1234));
 
     return 0;
 }
