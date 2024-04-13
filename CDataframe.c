@@ -148,3 +148,13 @@ void add_row_to_cdataframe(CDATAFRAME* cdataframe) {
 }
 
 
+void rename_column(CDATAFRAME* cdataframe, int column, char* new_title) {
+    if (column < 0 || column >= cdataframe->number_columns) {
+        printf("Invalid column index\n");
+        return;
+    }
+
+    cdataframe->columns[column]->title = new_title;
+}
+
+
