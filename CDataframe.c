@@ -129,3 +129,16 @@ int count_cells_condition(CDATAFRAME* cdataframe, int x, char op) {
 }
 
 
+void add_row_to_cdataframe(CDATAFRAME* cdataframe) {
+    for (int i = 0; i < cdataframe->number_columns; i++) {
+        int value;
+        printf("Enter the value for column '%s' row number %d:", cdataframe->columns[i]->title, (cdataframe->number_rows)+1);
+        scanf("%d", &value);
+        insert_value(cdataframe->columns[i], value);
+    }
+
+    // Increment the number of rows in the Cdataframe
+    cdataframe->number_rows++;
+}
+
+

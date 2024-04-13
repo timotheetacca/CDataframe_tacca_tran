@@ -22,6 +22,8 @@ int main() {
     printf("%d\n", count_cells_condition(cdataframe, 1, '='));
     printf("%d\n", count_cells_condition(cdataframe, 4, '>'));
     printf("%d\n", count_cells_condition(cdataframe, 4, '<'));
+    add_row_to_cdataframe(cdataframe);
+    display_cdataframe(cdataframe);
 
     return 0;
 }

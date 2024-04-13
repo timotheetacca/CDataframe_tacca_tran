@@ -17,5 +17,6 @@ void display_limited_columns_cdataframe(CDATAFRAME* cdataframe, int start, int e
 void display_number_of_rows(CDATAFRAME* cdataframe);
 void display_number_of_columns(CDATAFRAME* cdataframe);
 int count_cells_condition(CDATAFRAME* cdataframe, int x, char op);
+void add_row_to_cdataframe(CDATAFRAME* cdataframe);
 
 #endif
