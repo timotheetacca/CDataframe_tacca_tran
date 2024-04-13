@@ -26,4 +26,4 @@
 * ~~Display the number of cells containing a value less than x (*x given as parameter*)~~
   
 > [!NOTE]
-> Useful information that users should know, even when skimming content.
+> The last 3 functions were made in a single that takes in parameter the comparison symbol
