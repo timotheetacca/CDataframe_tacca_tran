@@ -99,6 +99,12 @@ void display_number_of_columns(CDATAFRAME* cdataframe) {
     printf("Number of columns: %d\n", cdataframe->number_columns);
 }
 
+void display_name_of_columns(CDATAFRAME* cdataframe) {
+    for (int i = 0; i < cdataframe->number_columns; i++) {
+        printf("Title of column %d: %s\n", i, cdataframe->columns[i]->title);
+    }
+}
+
 int count_cells_condition(CDATAFRAME* cdataframe, int x, char op) {
     int count = 0;
     for (int i = 0; i < cdataframe->number_columns; i++) {
