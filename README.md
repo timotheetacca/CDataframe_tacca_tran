@@ -10,12 +10,12 @@
 
 ## 3. Usual operations
 * ~~Add a row of values to the CDataframe~~
-* Delete a row of values from the CDataframe
-* Add a column to the CDataframe
+* ~~Delete a row of values from the CDataframe~~
+* ~~Add a column to the CDataframe~~
 * Delete a column from the CDataframe
 * ~~Rename the title of a column in the CDataframe~~
 * ~~Check the existence of a value (*search*) in the CDataframe~~
-* Access/replace the value in a CDataframe cell using its row and column number
+* ~~Access/replace the value in a CDataframe cell using its row and column number~~
 * ~~Display column names~~
 
 ## 4. Analysis and statistics
@@ -26,4 +26,5 @@
 * ~~Display the number of cells containing a value less than x (*x given as parameter*)~~
   
 > [!NOTE]
+> The function to access/replace the value in the CDataframe cell using its row and column number was divided into 2
 > The last 3 functions were made in a single one that takes in parameter the comparison symbol
