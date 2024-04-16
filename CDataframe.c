@@ -164,7 +164,7 @@ void delete_row_from_cdataframe(CDATAFRAME* cdataframe, int row) {
 
 void add_column_to_cdataframe(CDATAFRAME* cdataframe){
     char *title = (char *) malloc(sizeof(char) * 100);
-    printf("Enter the title of column %d:", cdataframe->number_rows+1);
+    printf("Enter the title of column %d:", cdataframe->number_columns+1);
     scanf(" %s", title);
     COLUMN* column = create_column(title);
     for (int j = 0; j < cdataframe->number_rows; j++) {
@@ -176,6 +176,19 @@ void add_column_to_cdataframe(CDATAFRAME* cdataframe){
     }
     cdataframe->columns[cdataframe->number_columns] = column;
     cdataframe->number_columns++;
+}
+
+void delete_column_to_cdataframe(CDATAFRAME* cdataframe, int column){
+    if (column < 0 || column >= cdataframe->number_columns)
+        return;
+    for (int i = column; i < cdataframe->number_columns - 1; i++) {
+        for (int j = 0; j < cdataframe->number_rows; j++) {
+            cdataframe->columns[i]->data[j] = cdataframe->columns[i+1]->data[j];
+            rename_column(cdataframe,i, cdataframe->columns[i+1]->title);
+        }
+    }
+    // Decrement the number of columns in the Cdataframe
+    cdataframe->number_columns--;
 }
 
 void rename_column(CDATAFRAME* cdataframe, int column, char* new_title){

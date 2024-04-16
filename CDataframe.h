@@ -21,6 +21,7 @@ int count_cells_condition(CDATAFRAME* cdataframe, int x, char op);
 void add_row_to_cdataframe(CDATAFRAME* cdataframe);
 void delete_row_from_cdataframe(CDATAFRAME* cdataframe, int row);
 void add_column_to_cdataframe(CDATAFRAME* cdataframe);
+void delete_column_to_cdataframe(CDATAFRAME* cdataframe, int column);
 void rename_column(CDATAFRAME* cdataframe, int column, char* new_title);
 int check_if_value_exists(CDATAFRAME* cdataframe, int value);
 int access_value(CDATAFRAME* cdataframe, int column, int row);

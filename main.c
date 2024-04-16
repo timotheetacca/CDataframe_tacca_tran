@@ -28,6 +28,7 @@ int main() {
 
     add_column_to_cdataframe(cdataframe);
     rename_column(cdataframe, 0, "Col1");
+    delete_column_to_cdataframe(cdataframe, 1);
     display_cdataframe(cdataframe);
 
     delete_row_from_cdataframe(cdataframe, 0);
