@@ -44,7 +44,7 @@ void fill_cdataframe(CDATAFRAME* cdataframe) {
 
             for (int j = 0; j < cdataframe->number_rows; j++) {
                 int value;
-                // scanf each vvalue of the column
+                // scanf each value of the column
                 printf("Enter the element of column %s at position %d:", title, j);
                 scanf("%d", &value);
                 insert_value(column, value);
@@ -53,6 +53,8 @@ void fill_cdataframe(CDATAFRAME* cdataframe) {
         }
     }
 }
+
+/* Hard filling of the CDataframe */
 
 
 void display_cdataframe(CDATAFRAME* cdataframe){
@@ -147,13 +149,40 @@ void add_row_to_cdataframe(CDATAFRAME* cdataframe) {
     cdataframe->number_rows++;
 }
 
+void delete_row_from_cdataframe(CDATAFRAME* cdataframe, int row) {
+    if (row < 0 || row >= cdataframe->number_rows)
+        return;
+    for (int i = 0; i < cdataframe->number_columns; i++) {
+        for (int j = row; j < cdataframe->number_rows - 1; j++) {
+            cdataframe->columns[i]->data[j] = cdataframe->columns[i]->data[j + 1];
+        }
+        cdataframe->columns[i]->logical_size = cdataframe->columns[i]->logical_size-1;
+    }
+    // Decrement the number of rows in the Cdataframe
+    cdataframe->number_rows--;
+}
 
-void rename_column(CDATAFRAME* cdataframe, int column, char* new_title) {
+void add_column_to_cdataframe(CDATAFRAME* cdataframe){
+    char *title = (char *) malloc(sizeof(char) * 100);
+    printf("Enter the title of column %d:", cdataframe->number_rows+1);
+    scanf(" %s", title);
+    COLUMN* column = create_column(title);
+    for (int j = 0; j < cdataframe->number_rows; j++) {
+        int value;
+        // scanf each value of the column
+        printf("Enter the element of column %s at position %d:", title, j);
+        scanf("%d", &value);
+        insert_value(column, value);
+    }
+    cdataframe->columns[cdataframe->number_columns] = column;
+    cdataframe->number_columns++;
+}
+
+void rename_column(CDATAFRAME* cdataframe, int column, char* new_title){
     if (column < 0 || column >= cdataframe->number_columns) {
         printf("Invalid column index\n");
         return;
     }
-
     cdataframe->columns[column]->title = new_title;
 }
 
@@ -170,3 +199,16 @@ int check_if_value_exists(CDATAFRAME* cdataframe, int value) {
     return -1;
 }
 
+int access_value(CDATAFRAME* cdataframe, int column, int row){
+    if ((column < 0 || column >= cdataframe->number_columns)||(row < 0 || row >= cdataframe->number_rows)) {
+        return -1;
+    }
+    return cdataframe->columns[column]->data[row];
+}
+
+void replace_value(CDATAFRAME* cdataframe, int column, int row, int new_val) {
+    if ((column < 0 || column >= cdataframe->number_columns) || (row < 0 || row >= cdataframe->number_rows)){
+        return;
+    }
+    cdataframe->columns[column]->data[row]=new_val;
+}
