@@ -1,7 +1,7 @@
 ## 1. Filling
 * ~~Creation of an empty CDataframe~~
 * ~~Filling in the CDataframe with user input~~
-* Hard filling of the CDataframe
+* ~~Hard filling of the CDataframe~~
 
 ## 2. Displaying
 * ~~Display the entire CDataframe~~
