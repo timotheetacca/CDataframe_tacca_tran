@@ -44,6 +44,9 @@ int main() {
     replace_value(cdataframe, 0, 0, 4);
     display_cdataframe(cdataframe);
 
+    hard_fill_cdataframe(cdataframe);
+    display_cdataframe(cdataframe);
+
     return 0;
 }
 

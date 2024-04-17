@@ -15,7 +15,7 @@ CDATAFRAME* create_cdataframe() {
     if (cdataframe->columns == NULL) {
         return 0;
     }
-    cdataframe->number_columns= INITIAL_COLUMNS;
+    cdataframe->number_columns= 0;
     cdataframe->number_rows = 0;
 
     return cdataframe;
@@ -54,7 +54,31 @@ void fill_cdataframe(CDATAFRAME* cdataframe) {
     }
 }
 
-/* Hard filling of the CDataframe */
+void hard_fill_cdataframe(CDATAFRAME* cdataframe) {
+    printf("Enter the size of the data frame:");
+    scanf(" %d", &cdataframe->number_columns);
+
+    if (cdataframe->number_columns > 0) {
+        printf("Enter the number of rows:");
+        scanf(" %d", &cdataframe->number_rows);
+
+        cdataframe->columns = (COLUMN **)malloc(cdataframe->number_columns * sizeof(COLUMN *));
+        if (cdataframe->columns == NULL) {
+            return;
+        }
+
+        for (int i = 0; i < cdataframe->number_columns; i++) {
+            char *title = (char *)malloc(sizeof(char) * 100);
+            sprintf(title, "Column %d", i);
+            COLUMN *column = create_column(title);
+            for (int j = 0; j < cdataframe->number_rows; j++) {
+                insert_value(column, i * cdataframe->number_rows + j);
+            }
+            cdataframe->columns[i] = column;
+        }
+    }
+}
+
 
 
 void display_cdataframe(CDATAFRAME* cdataframe){
