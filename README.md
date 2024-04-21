@@ -11,12 +11,8 @@ You can find out more about our project and our progress by clicking on the link
 
 ## Explanations
 
-
-
 Our spreadsheet is called a CDataframe. Each column has a title and can store an indefinite number of data items of the
 type int. All the columns must have the same amount of data in order to form a matrix. 
-
-
 
 Schematic of a CDataframe :
 
@@ -39,7 +35,9 @@ B --> F[Row 4]
 B --> G[...]
 ```
 
-Our CDataframe can perform the tasks listed below
+## Functionalities
+
+Our CDataframe can perform the tasks listed below  :
 
 ## 1. Filling
 * Creation of an empty CDataframe
