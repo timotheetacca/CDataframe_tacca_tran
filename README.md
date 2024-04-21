@@ -3,9 +3,9 @@
 
 ![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)
 
-Spreadsheet programs offer suite of features for managing data, including sorting, graphing, and calculating statistics. However, dealing with large volumes of structured data, can become  repetitive. Performing the same tasks across multiple files manually is time-consuming and prone to errors.
+Spreadsheet programs offer a suite of features for managing data, including sorting, graphing and calculating statistics. However, dealing with large volumes of structured data can become quite repetitive. Performing the same tasks across multiple files manually is time-consuming and prone to errors.
 
-For complex data manipulation, we have to consider using programming languages with powerful libraries like Pandas. Pandas offers a DataFrame data structure, which resembles a spreadsheet and provides flexibility for data analysis. C is language that can control over hardware and memory, making C a less suitable tool to create a CDataframe
+Thus, for the manipulation of more complex data, it's better to use programming languages with powerful libraries like Pandas. Pandas offers a DataFrame data structure, which resembles a spreadsheet and provides flexibility for data analysis. C is language that provides control over hardware and memory, making it less suitable for creating a CDataframe.
 
 You can find out more about our project and our progress by clicking on the link  [Github](https://github.com/timotheetacca/CDataframe_tacca_tran)
 
