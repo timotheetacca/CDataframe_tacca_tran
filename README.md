@@ -37,7 +37,7 @@ B --> G[...]
 
 ## Functionalities
 
-Our CDataframe can perform the tasks listed below  :
+You can use the functions below to manage the CDataframe :
 
 ## 1. Filling
 * Creation of an empty CDataframe
