@@ -115,4 +115,37 @@ void display_cdataframe(CDATAFRAME* cdataframe) {
     }
 }
 
+void display_limited_rows_cdataframe(CDATAFRAME* cdataframe, int start, int end) {
+    if (start < 0 || start >= cdataframe->number_rows || end < 0 || end >= cdataframe->number_rows || start > end) {
+        printf("Invalid range\n");
+        return;
+    }
+    for (int i = 0; i < cdataframe->number_columns; i++) {
+        printf("%s \n", cdataframe->columns[i]->title);
+        for (int j = start; j <= end; j++) {
+            if (j < cdataframe->columns[i]->size) {
+                    printf("[%d] ", j);
+                    if (cdataframe->columns[i]->data[i] == NULL) {
+                        printf("NULL\n");
+                    }
+                    else {
+                        char str[100];
+                        convert_value(cdataframe->columns[i], i, str, sizeof(str));
+                        printf("%s\n", str);
 
+                    }
+            }
+        }
+    }
+}
+
+void display_limited_columns_cdataframe(CDATAFRAME* cdataframe, int start, int end) {
+    if (start < 0 || start >= cdataframe->number_columns || end < 0 || end >= cdataframe->number_columns || start > end) {
+        printf("Invalid range\n");
+        return;
+    }
+    for (int i = start; i <= end; i++) {
+        printf("%s \n", cdataframe->columns[i]->title);
+        print_col(cdataframe->columns[i]);
+    }
+}
