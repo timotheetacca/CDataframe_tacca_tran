@@ -28,10 +28,13 @@ int insert_value(COLUMN *column, void *value) {
         }
     }
 
+    COL_TYPE *new_entry = (COL_TYPE *) malloc(sizeof(COL_TYPE));
+    column->data[column->size] = new_entry;
+
     // Insert the value based on its type
     switch (column->column_type) {
         case NULLVAL:
-            column->data[column->size] = NULL;
+            column->data[column->size]->struct_value = NULL;
             break;
         case UINT:
             column->data[column->size] = (COL_TYPE *)malloc(sizeof(unsigned int));
@@ -39,15 +42,15 @@ int insert_value(COLUMN *column, void *value) {
                 column->data[column->size] = NULL;
             }
             else
-            *((unsigned int *)column->data[column->size]) = *((unsigned int *)value);
+                *((unsigned int *)column->data[column->size]) = *((unsigned int *)value);
             break;
         case INT:
-            column->data[column->size] = (COL_TYPE *)malloc(sizeof(signed int));
+            column->data[column->size] = (COL_TYPE *)malloc(sizeof(int));
             if(value==NULL) {
                 column->data[column->size] = NULL;
             }
             else
-            *((signed int *)column->data[column->size]) = *((signed int *)value);
+                column->data[column->size]->int_value = *(int *)value;
             break;
         case CHAR:
             column->data[column->size] = (COL_TYPE *)malloc(sizeof(char));
@@ -55,7 +58,7 @@ int insert_value(COLUMN *column, void *value) {
                 column->data[column->size] = NULL;
             }
             else
-            *((char *)column->data[column->size]) = *((char *)value);
+                column->data[column->size]->char_value = *(int *)value;
             break;
         case FLOAT:
             column->data[column->size] = (COL_TYPE *)malloc(sizeof(float));
@@ -63,7 +66,7 @@ int insert_value(COLUMN *column, void *value) {
                 column->data[column->size] = NULL;
             }
             else
-            *((float *)column->data[column->size]) = *((float *)value);
+                *((float *)column->data[column->size]) = *((float *)value);
             break;
         case DOUBLE:
             column->data[column->size] = (COL_TYPE *)malloc(sizeof(double));
@@ -71,24 +74,15 @@ int insert_value(COLUMN *column, void *value) {
                 column->data[column->size] = NULL;
             }
             else
-            *((double *)column->data[column->size]) = *((double *)value);
+                *((double *)column->data[column->size]) = *((double *)value);
             break;
-        case STRING:
-            column->data[column->size] = (COL_TYPE *)malloc(strlen((char *)value) + 1); // +1 for the \O
-            if(value==NULL) {
-                column->data[column->size] = NULL;
-            }
-            else
-            strcpy((char *)column->data[column->size], (char *)value);
+        case STRING: {
+            size_t str_len = strlen((char *)value);
+            new_entry->string_value = malloc(str_len + 1);
+            strcpy((char *) column->data[column->size]->string_value, (char *) value);
+        }
             break;
-        case STRUCTURE:
-            column->data[column->size] = malloc(sizeof(void *));
-            if(value==NULL) {
-                column->data[column->size] = NULL;
-            }
-            else
-            *((void **)column->data[column->size]) = *((void **)value);
-            break;
+
         default:
             return 0;
     }
@@ -100,27 +94,28 @@ int insert_value(COLUMN *column, void *value) {
 
 void convert_value(COLUMN *col, unsigned long long int i, char *str, int size) {
     switch(col->column_type) {
+        case NULLVAL:
+            snprintf(str, size, "NULL");
+            break;
         case UINT:
-            snprintf(str, size, "%u", *((unsigned int *)col->data[i]));
+            snprintf(str, size, "%u", col->data[i]->uint_value);
             break;
         case INT:
-            snprintf(str, size, "%d", *((int *)col->data[i]));
+            snprintf(str, size, "%d",col->data[i]->int_value);
             break;
         case CHAR:
-            snprintf(str, size, "%c", *((char *)col->data[i]));
+            snprintf(str, size, "%c", col->data[i]->char_value);
             break;
         case FLOAT:
-            snprintf(str, size, "%f", *((float *)col->data[i]));
+            snprintf(str, size, "%f", col->data[i]->float_value);
             break;
         case DOUBLE:
-            snprintf(str, size, "%lf", *((double *)col->data[i]));
+            snprintf(str, size, "%lf", col->data[i]->double_value);
             break;
         case STRING:
-            snprintf(str, size, "%s", *((char *)col->data[i]));
+            snprintf(str, size, "%s", col->data[i]->string_value);
             break;
-        case STRUCTURE:
-            snprintf(str, size, "%p", *((void **)col->data[i]));
-            break;
+
         default:
             printf("Unsupported type");
     }
@@ -140,4 +135,3 @@ void print_col(COLUMN *column) {
         }
     }
 }
-
