@@ -9,13 +9,13 @@
 
 # Developing basic functions 
 ### 1. Filling
-* Creation of an empty CDataframe
-* Filling in the CDataframe with user input
+* ~~Creation of an empty CDataframe~~
+* ~~Filling in the CDataframe with user input~~
 * Hard filling of the CDataframe
 
 
 ### 2. Displaying
-* Display the entire CDataframe
+* ~~Display the entire CDataframe~~
 * Dispalay a part of the CDataframe rows according to a user-provided limit
 * Display a part of the columns of the CDataframe according to a limit supplied by the user
 
