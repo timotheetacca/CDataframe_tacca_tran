@@ -16,8 +16,8 @@
 
 ### 2. Displaying
 * ~~Display the entire CDataframe~~
-* Dispalay a part of the CDataframe rows according to a user-provided limit
-* Display a part of the columns of the CDataframe according to a limit supplied by the user
+* ~~Dispalay a part of the CDataframe rows according to a user-provided limit~~
+* ~~Display a part of the columns of the CDataframe according to a limit supplied by the user~~
 
 ### 3. Usual operations
 * Add a row of values to the CDataframe
