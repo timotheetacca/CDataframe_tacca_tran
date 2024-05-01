@@ -38,10 +38,20 @@ int main() {
     int value = 0;
     printf("%d", check_if_value_exists(cdataframe, value_type, &value));
 
+    // Access value
+    void* accessed_value = access_value(cdataframe, 0, 0);
+    int* int_ptr = (int*)accessed_value;
+    printf("%d\n", *int_ptr);
+
+    // Replace value
+    ENUM_TYPE new_value_type = INT;
+    int new_value = 0;
+    replace_value(cdataframe, 0, 0, new_value_type, &new_value);
+
     // Display CDataframe number of rows and columns and columns name
     display_number_of_rows(cdataframe);
     display_number_of_columns(cdataframe);
     display_name_of_columns(cdataframe);
-    
+
     return 0;
 }

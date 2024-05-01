@@ -295,6 +295,14 @@ void delete_column_from_cdataframe(CDATAFRAME* cdataframe, int column){
     cdataframe->number_columns--;
 }
 
+void rename_column(CDATAFRAME* cdataframe, int column, char* new_title){
+    if (column < 0 || column >= cdataframe->number_columns) {
+        printf("Invalid column index\n");
+        return;
+    }
+    cdataframe->columns[column]->title = new_title;
+}
+
 int check_if_value_exists(CDATAFRAME* cdataframe, ENUM_TYPE value_type, void* value) {
     // Returns 1 if the value exist in the CDataframe, else returns -1
     for (int i = 0; i < cdataframe->number_columns; i++) {
@@ -348,13 +356,22 @@ int check_if_value_exists(CDATAFRAME* cdataframe, ENUM_TYPE value_type, void* va
     return -1;
 }
 
+void* access_value(CDATAFRAME* cdataframe, int column, int row){
+    if ((column < 0 || column >= cdataframe->number_columns)||(row < 0 || row >= cdataframe->number_rows)) {
+        return NULL;
+    }
+    return cdataframe->columns[column]->data[row];
+}
 
-void rename_column(CDATAFRAME* cdataframe, int column, char* new_title){
-    if (column < 0 || column >= cdataframe->number_columns) {
-        printf("Invalid column index\n");
+void replace_value(CDATAFRAME* cdataframe, int column, int row, ENUM_TYPE value_type, void* new_val) {
+    if ((column < 0 || column >= cdataframe->number_columns) || (row < 0 || row >= cdataframe->number_rows)){
         return;
     }
-    cdataframe->columns[column]->title = new_title;
+    if (cdataframe->columns[column]->column_type != value_type){
+        printf("Incompatible data types. The value can't be replaced\n");
+        return;
+    }
+    cdataframe->columns[column]->data[row]=new_val;
 }
 
 void display_number_of_rows(CDATAFRAME* cdataframe) {
@@ -370,4 +387,8 @@ void display_name_of_columns(CDATAFRAME* cdataframe) {
     for (int i = 0; i < cdataframe->number_columns; i++) {
         printf("Title of column %d: %s\n", i, cdataframe->columns[i]->title);
     }
+}
+
+int count_cells_condition(CDATAFRAME* cdataframe, void* x, char op){
+
 }
