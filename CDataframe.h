@@ -15,6 +15,8 @@ void display_limited_rows_cdataframe(CDATAFRAME* cdataframe, int start, int end)
 void display_limited_columns_cdataframe(CDATAFRAME* cdataframe, int start, int end);
 void add_row_to_cdataframe(CDATAFRAME* cdataframe);
 void delete_row_from_cdataframe(CDATAFRAME* cdataframe, int row);
+void add_column_to_cdataframe(CDATAFRAME* cdataframe);
+void delete_column_from_cdataframe(CDATAFRAME* cdataframe, int column);
 void rename_column(CDATAFRAME* cdataframe, int column, char* new_title);
 void display_number_of_rows(CDATAFRAME* cdataframe);
 void display_number_of_columns(CDATAFRAME* cdataframe);

@@ -1,6 +1,7 @@
 #include "column.h"
 #include "CDataframe.h"
 #include <stddef.h>
+#include <stdio.h>
 
 int main() {
     CDATAFRAME* cdataframe = create_cdataframe();
@@ -21,6 +22,12 @@ int main() {
     // Delete row
     delete_row_from_cdataframe(cdataframe, 1);
     display_cdataframe(cdataframe);
+
+    // Add a column
+    add_column_to_cdataframe(cdataframe);
+
+    // Delete a column
+    delete_column_from_cdataframe(cdataframe, 0);
 
     // Rename a column
     rename_column(cdataframe,0, "Column 0");
