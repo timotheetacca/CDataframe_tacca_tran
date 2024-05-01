@@ -11,7 +11,7 @@ COLUMN *create_column(ENUM_TYPE type, char *title) {
     column->max_size = 0;
     column->column_type = type;
     column->data = NULL;
-    column->index = NULL;
+    column->index = (int *)malloc(sizeof(int));
 
     return column;
 }
@@ -86,7 +86,6 @@ int insert_value(COLUMN *column, void *value) {
         default:
             return 0;
     }
-    column->index[column->size] = column->size;
     column->size++;
     return 1;
 }
