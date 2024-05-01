@@ -22,10 +22,10 @@
 ### 3. Usual operations
 * ~~Add a row of values to the CDataframe~~
 * ~~Delete a row of values from the CDataframe~~
-* Add a column to the CDataframe
-* Delete a column from the CDataframe
+* ~~Add a column to the CDataframe~~
+* ~~Delete a column from the CDataframe~~
 * ~~Rename the title of a column in the CDataframe~~
-* Check the existence of a value (search) in the CDataframe
+* ~~Check the existence of a value (search) in the CDataframe~~
 * Access/replace the value in a CDataframe cell using its row and column number
 * ~~Display column names~~
 
