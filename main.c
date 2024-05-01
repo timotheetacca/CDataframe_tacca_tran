@@ -2,6 +2,7 @@
 #include "CDataframe.h"
 #include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
     CDATAFRAME* cdataframe = create_cdataframe();
@@ -23,19 +24,24 @@ int main() {
     delete_row_from_cdataframe(cdataframe, 1);
     display_cdataframe(cdataframe);
 
-    // Add a column
+    // Add column
     add_column_to_cdataframe(cdataframe);
 
-    // Delete a column
+    // Delete column
     delete_column_from_cdataframe(cdataframe, 0);
 
-    // Rename a column
+    // Rename column
     rename_column(cdataframe,0, "Column 0");
+
+    // Check existence of value
+    ENUM_TYPE value_type = INT;
+    int value = 0;
+    printf("%d", check_if_value_exists(cdataframe, value_type, &value));
 
     // Display CDataframe number of rows and columns and columns name
     display_number_of_rows(cdataframe);
     display_number_of_columns(cdataframe);
     display_name_of_columns(cdataframe);
-
+    
     return 0;
 }

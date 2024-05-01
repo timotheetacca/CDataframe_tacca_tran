@@ -295,6 +295,59 @@ void delete_column_from_cdataframe(CDATAFRAME* cdataframe, int column){
     cdataframe->number_columns--;
 }
 
+int check_if_value_exists(CDATAFRAME* cdataframe, ENUM_TYPE value_type, void* value) {
+    // Returns 1 if the value exist in the CDataframe, else returns -1
+    for (int i = 0; i < cdataframe->number_columns; i++) {
+        if (cdataframe->columns[i]->column_type == value_type) {
+            for (int j = 0; j < cdataframe->number_rows; j++) {
+                switch (value_type) {
+                    case NULLVAL:
+                        if (cdataframe->columns[i]->data[j] == NULL)
+                            return 1;
+                        break;
+                    case UINT:
+                        if (*((unsigned int*)cdataframe->columns[i]->data[j]) == value)
+                            return 1;
+                        break;
+                    case INT:
+                        if (*((int*)cdataframe->columns[i]->data[j]) == value)
+                            return 1;
+                        break;
+                    case CHAR:
+                        if (*((char*)cdataframe->columns[i]->data[j]) == value)
+                            return 1;
+                        break;
+                    case FLOAT:
+                        if (*((float*)cdataframe->columns[i]->data[j]) == *((float*)value))
+                            return 1;
+                        break;
+                    case DOUBLE:
+                        if (*((double*)cdataframe->columns[i]->data[j]) == *((double*)value))
+                            return 1;
+                        break;
+                    case STRING: {
+                        char *str1 = (char*)cdataframe->columns[i]->data[j];
+                        char *str2 = (char*)value;
+                        int index = 0;
+                        while (str1[index] != '\0' && str2[index] != '\0') {
+                            if (str1[index] != str2[index])
+                                break;
+                            index++;
+                        }
+                        if (str1[index] == '\0' && str2[index] == '\0')
+                            return 1;
+                        break;
+                    }
+                    default:
+                        printf("Unsupported type, try again\n");
+                        return -2;
+                }
+            }
+        }
+    }
+    return -1;
+}
+
 
 void rename_column(CDATAFRAME* cdataframe, int column, char* new_title){
     if (column < 0 || column >= cdataframe->number_columns) {
