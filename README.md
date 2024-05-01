@@ -26,7 +26,7 @@
 * ~~Delete a column from the CDataframe~~
 * ~~Rename the title of a column in the CDataframe~~
 * ~~Check the existence of a value (search) in the CDataframe~~
-* Access/replace the value in a CDataframe cell using its row and column number
+* ~~Access/replace the value in a CDataframe cell using its row and column number~~
 * ~~Display column names~~
 
 ### 4. Analysis and statistics
