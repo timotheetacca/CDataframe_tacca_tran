@@ -138,59 +138,26 @@ void print_col(COLUMN *column) {
 
 void sort(COLUMN *column, int sort_dir) {
     for (int i = 1; i < column->size; i++) {
-        int j = i-1;
+        int j = i - 1;
+        int temp = column->index[j + 1];
         while (j > 0) {
-            switch (column->column_type) {
-                case UINT:
-                    if (column->data[column->index[j + 1]] > column->data[column->index[j]]) {
-                        int temp = column->index[j + 1];
-                        column->index[j + 1] = column->index[j];
-                        column->index[j] = temp;
-                    }
-                    break;
-                case INT:
-                    if (column->data[column->index[j + 1]] > column->data[column->index[j]]) {
-                        int temp = column->index[j + 1];
-                        column->index[j + 1] = column->index[j];
-                        column->index[j] = temp;
-                    }
-                    break;
-                case CHAR:
-                    if (column->data[column->index[j + 1]] > column->data[column->index[j]]) {
-                        int temp = column->index[j + 1];
-                        column->index[j + 1] = column->index[j];
-                        column->index[j] = temp;
-                    }
-                    break;
-                case FLOAT:
-                    if (column->data[column->index[j + 1]] > column->data[column->index[j]]) {
-                        int temp = column->index[j + 1];
-                        column->index[j + 1] = column->index[j];
-                        column->index[j] = temp;
-                    }
-                    break;
-                case DOUBLE:
-                    if (column->data[column->index[j + 1]] > column->data[column->index[j]]) {
-                        int temp = column->index[j + 1];
-                        column->index[j + 1] = column->index[j];
-                        column->index[j] = temp;
-                    }
-                    break;
-                case STRING:
-                    if (strcmp(column->data[column->index[j + 1]], column->data[column->index[j]]) > 0) {
-                        int temp = column->index[j + 1];
-                        column->index[j + 1] = column->index[j];
-                        column->index[j] = temp;
-                    }
-                    break;
-                default:
-                    printf("Unsupported type\n");
-                    break;
+            if (column->column_type == STRING) {
+                if (strcmp(column->data[column->index[j + 1]], column->data[column->index[j]]) > 0) {
+                    column->index[j + 1] = column->index[j];
+                    j--;
+                }
             }
-            j--;
+            else {
+                if (column->data[column->index[j]] < column->data[column->index[i]]) {
+                    column->index[j + 1] = column->index[j];
+                    j--;
+                }
+            }
+        column->index[j+1] = temp;
         }
     }
 }
+
 
 void print_col_by_index(COLUMN *column){
     for (int i = 0; i < column->size ; i++) {
