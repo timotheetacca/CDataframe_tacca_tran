@@ -138,26 +138,33 @@ void print_col(COLUMN *column) {
 
 void sort(COLUMN *column, int sort_dir) {
     for (int i = 1; i < column->size; i++) {
-        int j = i-1;
-        int temp = column->index[i];
+        int j = i - 1;
+        int key = column->index[i];
         if (column->column_type == STRING) {
-            while(j>=0 && (strcmp(column->data[column->index[j + 1]], column->data[column->index[j]]) > 0)) {
+            while(j>=0 && (strcmp(column->data[j], column->data[i]) > 0)) {
                 column->index[j + 1] = column->index[j];
                 j--;
             }
-
-            }
+        }
         else {
             char str[100];
-            while(j>=0 && (column->data[column->index[j]] < column->data[column->index[i]])) {
+            //
+            convert_value(column, j, str, sizeof(str));
+            printf("%s(j = %d) <", str, j);
+            convert_value(column, i, str, sizeof(str));
+            printf(" %s(i = %d)\n", str, i);
+            //
+            while(j>=0 && (column->data[j] < column->data[i])) {
+                //
                 convert_value(column, j, str, sizeof(str));
-                printf("swaping : %s(j = %d) < ", str, j);
-                convert_value(column, i, str, sizeof(str));
-                printf("with %s(i = %d)\n", str, i);
-                column->index[j + 1] = column->index[j];
+                printf("swaped : %s ", str);
+                convert_value(column, j+1, str, sizeof(str));
+                printf("with %s\n", str);
+                //
+                column->index[j+1] = column->index[j];
                 j--;
             }
-            column->index[j+1] = temp;
+            column->index[j+1] = key;
         }
     }
 }
