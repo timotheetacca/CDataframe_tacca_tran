@@ -141,7 +141,7 @@ void sort(COLUMN *column, int sort_dir) {
         int j = i-1;
         int temp = column->index[i];
         if (column->column_type == STRING) {
-            while(j>0 && (strcmp(column->data[column->index[j + 1]], column->data[column->index[j]]) > 0)) {
+            while(j>=0 && (strcmp(column->data[column->index[j + 1]], column->data[column->index[j]]) > 0)) {
                 column->index[j + 1] = column->index[j];
                 j--;
             }
@@ -149,11 +149,11 @@ void sort(COLUMN *column, int sort_dir) {
             }
         else {
             char str[100];
-            convert_value(column, j, str, sizeof(str));
-            printf("%s(j = %d) < ", str, j);
-            convert_value(column, i, str, sizeof(str));
-            printf("%s(i = %d)\n", str, i);
-            while(j>0 && (column->data[column->index[j]] < column->data[column->index[i]])) {
+            while(j>=0 && (column->data[column->index[j]] < column->data[column->index[i]])) {
+                convert_value(column, j, str, sizeof(str));
+                printf("swaping : %s(j = %d) < ", str, j);
+                convert_value(column, i, str, sizeof(str));
+                printf("with %s(i = %d)\n", str, i);
                 column->index[j + 1] = column->index[j];
                 j--;
             }
