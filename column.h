@@ -25,6 +25,8 @@ struct column {
     ENUM_TYPE column_type;
     COL_TYPE **data; // array of pointers to stored data
     unsigned long long int *index; // array of integers
+    int valid_index;
+    int sort_dir;
 };
 typedef struct column COLUMN;
 
@@ -32,4 +34,7 @@ COLUMN *create_column(ENUM_TYPE type, char *title);
 int insert_value(COLUMN *column, void *value);
 void convert_value(COLUMN *col, unsigned long long int i, char *str, int size);
 void print_col(COLUMN *column);
+void sort(COLUMN* column, int sort_dir);
+void print_col_by_index(COLUMN *column);
+
 #endif
