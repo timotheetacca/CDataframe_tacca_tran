@@ -138,48 +138,48 @@ void print_col(COLUMN *column) {
 
 void sort(COLUMN *column, int sort_dir) {
     for (int i = 1; i < column->size; i++) {
-        int j = i;
+        int j = i-1;
         while (j > 0) {
             switch (column->column_type) {
                 case UINT:
-                    if (column->data[column->index[j - 1]]->uint_value > column->data[column->index[j]]->uint_value) {
-                        int temp = column->index[j - 1];
-                        column->index[j - 1] = column->index[j];
+                    if (column->data[column->index[j + 1]] > column->data[column->index[j]]) {
+                        int temp = column->index[j + 1];
+                        column->index[j + 1] = column->index[j];
                         column->index[j] = temp;
                     }
                     break;
                 case INT:
-                    if (column->data[column->index[j - 1]]->int_value > column->data[column->index[j]]->int_value) {
-                        int temp = column->index[j - 1];
-                        column->index[j - 1] = column->index[j];
+                    if (column->data[column->index[j + 1]] > column->data[column->index[j]]) {
+                        int temp = column->index[j + 1];
+                        column->index[j + 1] = column->index[j];
                         column->index[j] = temp;
                     }
                     break;
                 case CHAR:
-                    if (column->data[column->index[j - 1]]->char_value > column->data[column->index[j]]->char_value) {
-                        int temp = column->index[j - 1];
-                        column->index[j - 1] = column->index[j];
+                    if (column->data[column->index[j + 1]] > column->data[column->index[j]]) {
+                        int temp = column->index[j + 1];
+                        column->index[j + 1] = column->index[j];
                         column->index[j] = temp;
                     }
                     break;
                 case FLOAT:
-                    if (column->data[column->index[j - 1]]->float_value > column->data[column->index[j]]->float_value) {
-                        int temp = column->index[j - 1];
-                        column->index[j - 1] = column->index[j];
+                    if (column->data[column->index[j + 1]] > column->data[column->index[j]]) {
+                        int temp = column->index[j + 1];
+                        column->index[j + 1] = column->index[j];
                         column->index[j] = temp;
                     }
                     break;
                 case DOUBLE:
-                    if (column->data[column->index[j - 1]]->double_value > column->data[column->index[j]]->double_value) {
-                        int temp = column->index[j - 1];
-                        column->index[j - 1] = column->index[j];
+                    if (column->data[column->index[j + 1]] > column->data[column->index[j]]) {
+                        int temp = column->index[j + 1];
+                        column->index[j + 1] = column->index[j];
                         column->index[j] = temp;
                     }
                     break;
                 case STRING:
-                    if (strcmp(column->data[column->index[j - 1]]->string_value, column->data[column->index[j]]->string_value) > 0) {
-                        int temp = column->index[j - 1];
-                        column->index[j - 1] = column->index[j];
+                    if (strcmp(column->data[column->index[j + 1]], column->data[column->index[j]]) > 0) {
+                        int temp = column->index[j + 1];
+                        column->index[j + 1] = column->index[j];
                         column->index[j] = temp;
                     }
                     break;
