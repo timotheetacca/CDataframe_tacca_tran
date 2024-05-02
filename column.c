@@ -138,25 +138,30 @@ void print_col(COLUMN *column) {
 
 void sort(COLUMN *column, int sort_dir) {
     for (int i = 1; i < column->size; i++) {
-        int j = i - 1;
-        int temp = column->index[j + 1];
-        while (j > 0) {
-            if (column->column_type == STRING) {
-                if (strcmp(column->data[column->index[j + 1]], column->data[column->index[j]]) > 0) {
-                    column->index[j + 1] = column->index[j];
-                    j--;
-                }
+        int j = i-1;
+        int temp = column->index[i];
+        if (column->column_type == STRING) {
+            while(j>0 && (strcmp(column->data[column->index[j + 1]], column->data[column->index[j]]) > 0)) {
+                column->index[j + 1] = column->index[j];
+                j--;
             }
-            else {
-                if (column->data[column->index[j]] < column->data[column->index[i]]) {
-                    column->index[j + 1] = column->index[j];
-                    j--;
-                }
+
             }
-        column->index[j+1] = temp;
+        else {
+            char str[100];
+            convert_value(column, j, str, sizeof(str));
+            printf("%s(j = %d) < ", str, j);
+            convert_value(column, i, str, sizeof(str));
+            printf("%s(i = %d)\n", str, i);
+            while(j>0 && (column->data[column->index[j]] < column->data[column->index[i]])) {
+                column->index[j + 1] = column->index[j];
+                j--;
+            }
+            column->index[j+1] = temp;
         }
     }
 }
+
 
 
 void print_col_by_index(COLUMN *column){
