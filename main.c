@@ -38,27 +38,17 @@ int main() {
     int value = 0;
     printf("%d", check_if_value_exists(cdataframe, value_type, &value));
 
-    // Access value
-    void* accessed_value = access_value(cdataframe, 0, 0);
-    int* int_ptr = (int*)accessed_value;
-    printf("%d\n", *int_ptr);
-
     // Replace value
     ENUM_TYPE new_value_type = INT;
     int new_value = 0;
     replace_value(cdataframe, 0, 0, new_value_type, &new_value);
 
-    // Display CDataframe number of rows and columns and columns name
-    display_number_of_rows(cdataframe);
-    display_number_of_columns(cdataframe);
-    display_name_of_columns(cdataframe);
-
     // Comparison with x
-    ENUM_TYPE x_type = INT;
-    int x1=1,x2=4,x3=40;
-    printf("%d\n", count_cells_condition(cdataframe, x_type, &x1, '='));
-    printf("%d\n", count_cells_condition(cdataframe, x_type, &x2, '>'));
-    printf("%d\n", count_cells_condition(cdataframe, x_type, &x3, '<'));
+    ENUM_TYPE x_type1 = INT;
+    int x1=1,x2=4,x3=50;
+    printf("%d\n", count_cells_condition(cdataframe, x_type1, &x1, '='));
+    printf("%d\n", count_cells_condition(cdataframe, x_type1, &x2, '>'));
+    printf("%d\n", count_cells_condition(cdataframe, x_type1, &x3, '<'));
 
     return 0;
 }
