@@ -3,7 +3,6 @@
 
 * ~~create_column~~
 * ~~insert_value~~
-* delete_column 
 * ~~convert_value~~
 * ~~print_col~~
 
