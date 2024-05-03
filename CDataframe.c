@@ -315,15 +315,15 @@ int check_if_value_exists(CDATAFRAME* cdataframe, ENUM_TYPE value_type, void* va
                             return 1;
                         break;
                     case UINT:
-                        if (*((unsigned int*)cdataframe->columns[i]->data[j]) == value)
+                        if (*((unsigned int*)cdataframe->columns[i]->data[j]) == *((unsigned int*)value))
                             return 1;
                         break;
                     case INT:
-                        if (*((int*)cdataframe->columns[i]->data[j]) == value)
+                        if (*((int*)cdataframe->columns[i]->data[j]) ==*((int*)value))
                             return 1;
                         break;
                     case CHAR:
-                        if (*((char*)cdataframe->columns[i]->data[j]) == value)
+                        if (*((char*)cdataframe->columns[i]->data[j]) == *((char*)value))
                             return 1;
                         break;
                     case FLOAT:
@@ -336,7 +336,7 @@ int check_if_value_exists(CDATAFRAME* cdataframe, ENUM_TYPE value_type, void* va
                         break;
                     case STRING: {
                         char *str1 = (char*)cdataframe->columns[i]->data[j];
-                        char *str2 = value;
+                        char *str2 = (char*)value;
                         int index = 0;
                         while (str1[index] != '\0' && str2[index] != '\0') {
                             if (str1[index] != str2[index])
@@ -355,13 +355,6 @@ int check_if_value_exists(CDATAFRAME* cdataframe, ENUM_TYPE value_type, void* va
         }
     }
     return -1;
-}
-
-void* access_value(CDATAFRAME* cdataframe, int column, int row){
-    if ((column < 0 || column >= cdataframe->number_columns)||(row < 0 || row >= cdataframe->number_rows)) {
-        return NULL;
-    }
-    return cdataframe->columns[column]->data[row];
 }
 
 void replace_value(CDATAFRAME* cdataframe, int column, int row, ENUM_TYPE value_type, void* new_val) {
@@ -403,37 +396,37 @@ int count_cells_condition(CDATAFRAME* cdataframe, ENUM_TYPE x_type, void* x, cha
                             printf("Comparison '>' not supported for NULL values");
                         else if (op == '<')
                             printf("Comparison '<' not supported for NULL values");
-                        else
+                        else if (op == '=' && op == '>' && op!='<')
                             printf("Invalid comparison operation\n");
                         break;
                     case UINT:
-                        if (op == '=' && *((unsigned int*)cdataframe->columns[i]->data[j]) == x)
+                        if (op == '=' && *((unsigned int*)cdataframe->columns[i]->data[j]) == *((unsigned int*)x))
                             count++;
-                        else if (op == '>' && *((unsigned int*)cdataframe->columns[i]->data[j]) > x)
+                        else if (op == '>' && *((unsigned int*)cdataframe->columns[i]->data[j]) > *((unsigned int*)x))
                             count++;
-                        else if (op == '<' && *((unsigned int*)cdataframe->columns[i]->data[j]) < x)
+                        else if (op == '<' && *((unsigned int*)cdataframe->columns[i]->data[j]) < *((unsigned int*)x))
                             count++;
-                        else
+                        else if (op == '=' && op == '>' && op!='<')
                             printf("Invalid comparison operation\n");
                         break;
                     case INT:
-                        if (op == '=' && *((int*)cdataframe->columns[i]->data[j]) == x)
+                        if (op == '=' && *((int*)cdataframe->columns[i]->data[j]) == *((int*)x))
                             count++;
-                        else if (op == '>' && *((int*)cdataframe->columns[i]->data[j]) > x)
+                        else if (op == '>' && *((int*)cdataframe->columns[i]->data[j]) > *((int*)x))
                             count++;
-                        else if (op == '<' && *((int*)cdataframe->columns[i]->data[j]) < x)
+                        else if (op == '<' && *((int*)cdataframe->columns[i]->data[j]) < *((int*)x))
                             count++;
-                        else
+                        else if (op == '=' && op == '>' && op!='<')
                             printf("Invalid comparison operation\n");
                         break;
                     case CHAR:
-                        if (op == '=' && *((char*)cdataframe->columns[i]->data[j]) == x)
+                        if (op == '=' && *((char*)cdataframe->columns[i]->data[j]) == *((char*)x))
                             count++;
-                        else if (op == '>' && *((char*)cdataframe->columns[i]->data[j]) > x)
+                        else if (op == '>' && *((char*)cdataframe->columns[i]->data[j]) > *((char*)x))
                             count++;
-                        else if (op == '<' && *((char*)cdataframe->columns[i]->data[j]) < x)
+                        else if (op == '<' && *((char*)cdataframe->columns[i]->data[j]) < *((char*)x))
                             count++;
-                        else
+                        else if (op == '=' && op == '>' && op!='<')
                             printf("Invalid comparison operation\n");
                         break;
                     case FLOAT:
@@ -443,7 +436,7 @@ int count_cells_condition(CDATAFRAME* cdataframe, ENUM_TYPE x_type, void* x, cha
                             count++;
                         else if (op == '<' && *((float*)cdataframe->columns[i]->data[j]) < *((float*)x))
                             count++;
-                        else
+                        else if (op == '=' && op == '>' && op!='<')
                             printf("Invalid comparison operation\n");
                         break;
                     case DOUBLE:
@@ -453,8 +446,8 @@ int count_cells_condition(CDATAFRAME* cdataframe, ENUM_TYPE x_type, void* x, cha
                             count++;
                         else if (op == '<' && *((double*)cdataframe->columns[i]->data[j]) < *((double*)x))
                             count++;
-                        else
-                            printf("Invalid comparison operation\n");
+                        else if (op == '=' && op == '>' && op!='<')
+                            printf( "Invalid comparison operation\n");
                         break;
                     case STRING:{
                         char *str1 = (char*)cdataframe->columns[i]->data[j];
@@ -488,7 +481,7 @@ int count_cells_condition(CDATAFRAME* cdataframe, ENUM_TYPE x_type, void* x, cha
                                 index++;
                             }
                         }
-                        else
+                        else if (op == '=' && op == '>' && op!='<')
                             printf("Invalid comparison operation\n");
                         break;
                     }
