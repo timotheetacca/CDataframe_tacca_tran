@@ -11,39 +11,40 @@ int partition(COLUMN *column, int left, int right) {
     int pivot_index = column->index[right];
     int i = left - 1;
     for (int j = left; j <= right; j++) {
+        int index = (int)column->index[j];
         switch (column->column_type) {
             case UINT:
-                if (*(int *)column->data[column->index[j]] < *(int *)column->data[pivot_index]) {
+                if (*(int *)column->data[index] < *(int *)column->data[pivot_index]) {
                     i++;
                     swap(&column->index[i], &column->index[j]);
                 }
                 break;
             case INT:
-                if (*(int *)column->data[column->index[j]] < *(int *)column->data[pivot_index]) {
+                if (*(int *)column->data[index] < *(int *)column->data[pivot_index]) {
                     i++;
                     swap(&column->index[i], &column->index[j]);
                 }
                 break;
             case CHAR:
-                if (*(char *)column->data[column->index[j]] < *(char *)column->data[pivot_index]) {
+                if (*(char *)column->data[index] < *(char *)column->data[pivot_index]) {
                     i++;
                     swap(&column->index[i], &column->index[j]);
                 }
                 break;
             case FLOAT:
-                if (*((float *)column->data[column->index[j]]) < *((float *)column->data[pivot_index])) {
+                if (*((float *)column->data[index]) < *((float *)column->data[pivot_index])) {
                     i++;
                     swap(&column->index[i], &column->index[j]);
                 }
                 break;
             case DOUBLE:
-                if (*((double *)column->data[column->index[j]]) < *((double *)column->data[pivot_index])) {
+                if (*((double *)column->data[index]) < *((double *)column->data[pivot_index])) {
                     i++;
                     swap(&column->index[i], &column->index[j]);
                 }
                 break;
             case STRING: {
-                char* str_a = (char*)column->data[column->index[j]];
+                char* str_a = (char*)column->data[index];
                 char* str_b = (char*)column->data[pivot_index];
                 if (strcmp(str_a, str_b) < 0) {
                     i++;
@@ -88,9 +89,10 @@ void sort(COLUMN *column) {
         printf("This column is already sorted.\n");
 
     } else if (column->valid_index == 0) {
-        quicksort(column, 1, column->size-1);
+        quicksort(column, 0, column->size-1);
 
     } else if (column->valid_index == -1) {
+
         insertionsort(column, column->size);
         for (int i = 0; i < column->size / 2; i++) {
             unsigned long long int temp = column->index[i];
