@@ -34,7 +34,5 @@ COLUMN *create_column(ENUM_TYPE type, char *title);
 int insert_value(COLUMN *column, void *value);
 void convert_value(COLUMN *col, unsigned long long int i, char *str, int size);
 void print_col(COLUMN *column);
-void sort(COLUMN* column, int sort_dir);
-void print_col_by_index(COLUMN *column);
 
 #endif
