@@ -18,6 +18,12 @@ int main() {
     sort(cdataframe->columns[0]);
     print_col_by_index(cdataframe->columns[0]);
 
+    erase_index(cdataframe->columns[0]);
+    if (cdataframe->columns[0]->index == NULL) {
+        printf("Memory has been successfully freed \n");
+    } else {
+        printf("Memory has not been freed \n");
+    }
 
     return 0;
 }

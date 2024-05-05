@@ -1,4 +1,5 @@
 #include "column.h"
+#include <stdlib.h>
 #include <string.h>
 
 void swap(int *a, int *b){
@@ -146,5 +147,13 @@ void print_col_by_index(COLUMN *column) {
         int j = column->index[i];
         convert_value(column, j, str, sizeof(str));
         printf("%s (index = %d)\n", str, j);
+    }
+}
+
+void erase_index(COLUMN *column) {
+    if (column != NULL && column->index != NULL) {
+        free(column->index);
+        column->index = NULL;
+        column->valid_index = 0;
     }
 }
