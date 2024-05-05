@@ -39,7 +39,7 @@
 * ~~Insertion sort and Quick sort in descending~~ and ascending order
 * ~~Display the contents of a sorted column~~
 * ~~Delete column index~~
-* Check if a column has an index
+* ~~Check if a column has an index~~
 * Update an index
 * Dichotomous search
 
