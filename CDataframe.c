@@ -304,7 +304,6 @@ void rename_column(CDATAFRAME* cdataframe, int column, char* new_title){
     }
     cdataframe->columns[column]->title = new_title;
 }
-
 int check_if_value_exists(CDATAFRAME* cdataframe, ENUM_TYPE value_type, void* value) {
     // Returns 1 if the value exist in the CDataframe, else returns -1
     for (int i = 0; i < cdataframe->number_columns; i++) {
@@ -316,15 +315,15 @@ int check_if_value_exists(CDATAFRAME* cdataframe, ENUM_TYPE value_type, void* va
                             return 1;
                         break;
                     case UINT:
-                        if (*((unsigned int*)cdataframe->columns[i]->data[j]) == value)
+                        if (*((unsigned int*)cdataframe->columns[i]->data[j]) == *((unsigned int*)value))
                             return 1;
                         break;
                     case INT:
-                        if (*((int*)cdataframe->columns[i]->data[j]) == value)
+                        if (*((int*)cdataframe->columns[i]->data[j]) ==*((int*)value))
                             return 1;
                         break;
                     case CHAR:
-                        if (*((char*)cdataframe->columns[i]->data[j]) == value)
+                        if (*((char*)cdataframe->columns[i]->data[j]) == *((char*)value))
                             return 1;
                         break;
                     case FLOAT:
@@ -358,13 +357,6 @@ int check_if_value_exists(CDATAFRAME* cdataframe, ENUM_TYPE value_type, void* va
     return -1;
 }
 
-void* access_value(CDATAFRAME* cdataframe, int column, int row){
-    if ((column < 0 || column >= cdataframe->number_columns)||(row < 0 || row >= cdataframe->number_rows)) {
-        return NULL;
-    }
-    return cdataframe->columns[column]->data[row];
-}
-
 void replace_value(CDATAFRAME* cdataframe, int column, int row, ENUM_TYPE value_type, void* new_val) {
     if ((column < 0 || column >= cdataframe->number_columns) || (row < 0 || row >= cdataframe->number_rows)){
         return;
@@ -391,6 +383,114 @@ void display_name_of_columns(CDATAFRAME* cdataframe) {
     }
 }
 
-int count_cells_condition(CDATAFRAME* cdataframe, void* x, char op){
-
+int count_cells_condition(CDATAFRAME* cdataframe, ENUM_TYPE x_type, void* x, char op){
+    int count = 0;
+    for (int i = 0; i < cdataframe->number_columns; i++) {
+        if (cdataframe->columns[i]->column_type == x_type) {
+            for (int j = 0; j < cdataframe->columns[i]->size; j++) {
+                switch (x_type) {
+                    case NULLVAL:
+                        if (op == '=' && cdataframe->columns[i]->data[j] == NULL)
+                            count++;
+                        else if (op == '>')
+                            printf("Comparison '>' not supported for NULL values");
+                        else if (op == '<')
+                            printf("Comparison '<' not supported for NULL values");
+                        else if (op == '=' && op == '>' && op!='<')
+                            printf("Invalid comparison operation\n");
+                        break;
+                    case UINT:
+                        if (op == '=' && *((unsigned int*)cdataframe->columns[i]->data[j]) == *((unsigned int*)x))
+                            count++;
+                        else if (op == '>' && *((unsigned int*)cdataframe->columns[i]->data[j]) > *((unsigned int*)x))
+                            count++;
+                        else if (op == '<' && *((unsigned int*)cdataframe->columns[i]->data[j]) < *((unsigned int*)x))
+                            count++;
+                        else if (op == '=' && op == '>' && op!='<')
+                            printf("Invalid comparison operation\n");
+                        break;
+                    case INT:
+                        if (op == '=' && *((int*)cdataframe->columns[i]->data[j]) == *((int*)x))
+                            count++;
+                        else if (op == '>' && *((int*)cdataframe->columns[i]->data[j]) > *((int*)x))
+                            count++;
+                        else if (op == '<' && *((int*)cdataframe->columns[i]->data[j]) < *((int*)x))
+                            count++;
+                        else if (op == '=' && op == '>' && op!='<')
+                            printf("Invalid comparison operation\n");
+                        break;
+                    case CHAR:
+                        if (op == '=' && *((char*)cdataframe->columns[i]->data[j]) == *((char*)x))
+                            count++;
+                        else if (op == '>' && *((char*)cdataframe->columns[i]->data[j]) > *((char*)x))
+                            count++;
+                        else if (op == '<' && *((char*)cdataframe->columns[i]->data[j]) < *((char*)x))
+                            count++;
+                        else if (op == '=' && op == '>' && op!='<')
+                            printf("Invalid comparison operation\n");
+                        break;
+                    case FLOAT:
+                        if (op == '=' && *((float*)cdataframe->columns[i]->data[j]) == *((float*)x))
+                            count++;
+                        else if (op == '>' && *((float*)cdataframe->columns[i]->data[j]) > *((float*)x))
+                            count++;
+                        else if (op == '<' && *((float*)cdataframe->columns[i]->data[j]) < *((float*)x))
+                            count++;
+                        else if (op == '=' && op == '>' && op!='<')
+                            printf("Invalid comparison operation\n");
+                        break;
+                    case DOUBLE:
+                        if (op == '=' && *((double*)cdataframe->columns[i]->data[j]) == *((double*)x))
+                            count++;
+                        else if (op == '>' && *((double*)cdataframe->columns[i]->data[j]) > *((double*)x))
+                            count++;
+                        else if (op == '<' && *((double*)cdataframe->columns[i]->data[j]) < *((double*)x))
+                            count++;
+                        else if (op == '=' && op == '>' && op!='<')
+                            printf( "Invalid comparison operation\n");
+                        break;
+                    case STRING:{
+                        char *str1 = (char*)cdataframe->columns[i]->data[j];
+                        char *str2 = x;
+                        int index = 0;
+                        if (op == '='){
+                            while (str1[index] != '\0' && str2[index] != '\0') {
+                                if (str1[index] != str2[index])
+                                    break;
+                                index++;
+                            }
+                            if (str1[index] == '\0' && str2[index] == '\0'){
+                                count++;
+                            }
+                        }
+                        else if (op == '>'){
+                            while (str1[index] != '\0' && str2[index] != '\0') {
+                                if (str1[index] > str2[index]){
+                                    count++;
+                                    break;
+                                }
+                                index++;
+                            }
+                        }
+                        else if (op == '<'){
+                            while (str1[index] != '\0' && str2[index] != '\0') {
+                                if (str1[index] < str2[index]){
+                                    count++;
+                                    break;
+                                }
+                                index++;
+                            }
+                        }
+                        else if (op == '=' && op == '>' && op!='<')
+                            printf("Invalid comparison operation\n");
+                        break;
+                    }
+                    default:
+                        printf("Unsupported type, try again\n");
+                        return -1;
+                }
+            }
+        }
+    }
+    return count;
 }
