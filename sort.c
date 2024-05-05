@@ -129,13 +129,15 @@ void insertionsort(COLUMN *column, int N) {
 
 void sort(COLUMN *column) {
     if (column->valid_index == 1) {
-        printf("This column is already sorted.\n");
+        printf("This column is already sorted\n");
 
     } else if (column->valid_index == 0) {
         quicksort(column, 0, column->size-1);
+        column->valid_index = 1;
 
     } else if (column->valid_index == -1) {
         insertionsort(column, column->size);
+        column->valid_index = 1;
         }
 }
 
@@ -155,5 +157,17 @@ void erase_index(COLUMN *column) {
         free(column->index);
         column->index = NULL;
         column->valid_index = 0;
+    }
+}
+
+int check_index(COLUMN *column) {
+    if (column != NULL && column->index != NULL) {
+        if (column->valid_index == 1) {
+            return 1;
+        } else {
+            return -1;
+        }
+    } else {
+        return 0;
     }
 }
