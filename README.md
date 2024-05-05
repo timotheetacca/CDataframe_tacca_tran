@@ -36,8 +36,8 @@
 * ~~Return the number of values which are equal to x (x given as a parameter).~~
 
 # Sort a column
-* Insertion sort **or** Quick sort
-* Display the contents of a sorted column
+* ~~Insertion sort and Quick sort~~
+* ~~Display the contents of a sorted column~~
 * Delete column index
 * Check if a column has an index
 * Update an index
