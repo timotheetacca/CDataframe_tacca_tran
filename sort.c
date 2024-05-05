@@ -13,6 +13,8 @@ int partition(COLUMN *column, int left, int right) {
     for (int j = left; j <= right; j++) {
         int index = (int)column->index[j];
         switch (column->column_type) {
+            case NULLVAL:
+                break;
             case UINT:
                 if (*(int *)column->data[index] < *(int *)column->data[pivot_index]) {
                     i++;
@@ -70,19 +72,59 @@ void quicksort(COLUMN *column, int left, int right) {
 }
 
 
-void insertionsort(COLUMN *column, int n) {
+void insertionsort(COLUMN *column, int N) {
     int i, j;
-    unsigned long long int key;
-    for (i = 1; i < n; i++) {
-        key = column->index[i];
+    for (i = 1; i <= N; i++) {
         j = i - 1;
-        while (j >= 0 && (column->data[column->index[j]] < column->data[key])) { // Use "<" for descending order
-            column->index[j + 1] = column->index[j];
-            j = j - 1;
+        int temp = (int)column->index[i];
+        int index = (int)column->index[j];
+        switch (column->column_type) {
+            case NULLVAL:
+                break;
+            case UINT:
+                while (j >= 0 && *(int *)column->data[index] > *(int *)column->data[temp]) {
+                    column->index[j + 1] = column->index[j];
+                    j = j - 1;
+                }
+            case INT:
+                while (j >= 0 && *(int *)column->data[index] > *(int *)column->data[temp]) {
+                    column->index[j + 1] = column->index[j];
+                    j = j - 1;
+                }
+                break;
+            case CHAR:
+                while (j >= 0 && *(char *)column->data[index] > *(char *)column->data[temp]) {
+                    column->index[j + 1] = column->index[j];
+                    j = j - 1;
+                }
+                break;
+            case FLOAT:
+                while (j >= 0 && *((float *)column->data[index]) > *((float *)column->data[temp])) {
+                    column->index[j + 1] = column->index[j];
+                    j = j - 1;
+                }
+                break;
+            case DOUBLE:
+                while (j >= 0 && *((double *)column->data[index]) > *((double *)column->data[temp])) {
+                    column->index[j + 1] = column->index[j];
+                    j = j - 1;
+                }
+                break;
+            case STRING:
+                while (j >= 0 && strcmp((char *)column->data[index], (char *)column->data[temp]) > 0) {
+                    column->index[j + 1] = column->index[j];
+                    j = j - 1;
+                }
+                break;
+
+            default:
+                return;
+
         }
-        column->index[j + 1] = key;
+        column->index[j + 1] = temp;
     }
 }
+
 
 void sort(COLUMN *column) {
     if (column->valid_index == 1) {
@@ -92,15 +134,10 @@ void sort(COLUMN *column) {
         quicksort(column, 0, column->size-1);
 
     } else if (column->valid_index == -1) {
-
         insertionsort(column, column->size);
-        for (int i = 0; i < column->size / 2; i++) {
-            unsigned long long int temp = column->index[i];
-            column->index[i] = column->index[column->size - i - 1];
-            column->index[column->size - i - 1] = temp;
         }
-    }
 }
+
 
 void print_col_by_index(COLUMN *column) {
     for (int i = 0; i < column->size; i++) {

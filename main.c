@@ -13,6 +13,10 @@ int main() {
     sort(cdataframe->columns[0]);
     print_col_by_index(cdataframe->columns[0]);
 
+    add_row_to_cdataframe(cdataframe);
+    printf("\n");
+    sort(cdataframe->columns[0]);
+    print_col_by_index(cdataframe->columns[0]);
 
 
     return 0;

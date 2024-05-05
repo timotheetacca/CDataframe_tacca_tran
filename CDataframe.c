@@ -51,7 +51,6 @@ void fill_cdataframe(CDATAFRAME* cdataframe) {
         cdataframe->columns[i] = create_column(column_type, title);
 
         for (int j = 0; j < cdataframe->number_rows; j++) {
-            cdataframe->columns[i]->index[cdataframe->columns[i]->size] = cdataframe->columns[i]->size;
             switch (column_type) {
                 case NULLVAL:{
                     insert_value(cdataframe->columns[i], NULL);

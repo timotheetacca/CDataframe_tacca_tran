@@ -31,6 +31,7 @@ int insert_value(COLUMN *column, void *value) {
 
     COL_TYPE *new_entry = (COL_TYPE *) malloc(sizeof(COL_TYPE));
     column->data[column->size] = new_entry;
+    column->index[column->size] = column->size;
 
     // Insert the value based on its type
     switch (column->column_type) {
