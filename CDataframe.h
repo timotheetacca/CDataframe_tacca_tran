@@ -19,11 +19,10 @@ void add_column_to_cdataframe(CDATAFRAME* cdataframe);
 void delete_column_from_cdataframe(CDATAFRAME* cdataframe, int column);
 void rename_column(CDATAFRAME* cdataframe, int column, char* new_title);
 int check_if_value_exists(CDATAFRAME* cdataframe, ENUM_TYPE value_type, void* value);
-void* access_value(CDATAFRAME* cdataframe, int column, int row);
 void replace_value(CDATAFRAME* cdataframe, int column, int row, ENUM_TYPE value_type, void* new_val);
 void display_number_of_rows(CDATAFRAME* cdataframe);
 void display_number_of_columns(CDATAFRAME* cdataframe);
 void display_name_of_columns(CDATAFRAME* cdataframe);
-int count_cells_condition(CDATAFRAME* cdataframe, void* x, char op);
+int count_cells_condition(CDATAFRAME* cdataframe, ENUM_TYPE x_type, void* x, char op);
 
 #endif
