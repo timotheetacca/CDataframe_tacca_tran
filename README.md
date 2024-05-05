@@ -36,9 +36,9 @@
 * ~~Return the number of values which are equal to x (x given as a parameter).~~
 
 # Sort a column
-* ~~Insertion sort and Quick sort~~
+* ~~Insertion sort and Quick sort in descending~~ and ascending order
 * ~~Display the contents of a sorted column~~
-* Delete column index
+* ~~Delete column index~~
 * Check if a column has an index
 * Update an index
 * Dichotomous search
