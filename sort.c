@@ -171,3 +171,7 @@ int check_index(COLUMN *column) {
         return 0;
     }
 }
+
+void update_index(COLUMN *column) {
+    insertionsort(column, column->size);
+}

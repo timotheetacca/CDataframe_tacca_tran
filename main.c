@@ -32,6 +32,7 @@ int main() {
     printf("\n");
     sort(cdataframe->columns[0]);
     print_col_by_index(cdataframe->columns[0]);
+    update_index(cdataframe->columns[0], cdataframe->columns[0]->size);
 
     // Erase index
     erase_index(cdataframe->columns[0]);
