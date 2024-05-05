@@ -51,7 +51,6 @@ void fill_cdataframe(CDATAFRAME* cdataframe) {
         cdataframe->columns[i] = create_column(column_type, title);
 
         for (int j = 0; j < cdataframe->number_rows; j++) {
-            cdataframe->columns[i]->index[cdataframe->columns[i]->size] = cdataframe->columns[i]->size;
             switch (column_type) {
                 case NULLVAL:{
                     insert_value(cdataframe->columns[i], NULL);
@@ -155,6 +154,7 @@ void display_limited_columns_cdataframe(CDATAFRAME* cdataframe, int start, int e
 void add_row_to_cdataframe(CDATAFRAME* cdataframe) {
     for (int i = 0; i < cdataframe->number_columns; i++) {
         void *value;
+        cdataframe->columns[i]->valid_index = -1;
         printf("Enter the element of type %u for column '%s' row number %d:", cdataframe->columns[i]->column_type, cdataframe->columns[i]->title, (cdataframe->number_rows));
         switch (cdataframe->columns[i]->column_type) {
             case UINT: {
@@ -207,6 +207,7 @@ void delete_row_from_cdataframe(CDATAFRAME* cdataframe, int row) {
     if (row < 0 || row >= cdataframe->number_rows)
         return;
     for (int i = 0; i < cdataframe->number_columns; i++) {
+        cdataframe->columns[i]->valid_index = -1;
         for (int j = row; j < cdataframe->number_rows - 1; j++) {
             cdataframe->columns[i]->data[j] = cdataframe->columns[i]->data[j + 1];
         }

@@ -12,7 +12,8 @@ COLUMN *create_column(ENUM_TYPE type, char *title) {
     column->column_type = type;
     column->data = NULL;
     column->index = (int *)malloc(sizeof(int));
-
+    column->valid_index = 0;
+    column->sort_dir = 0;
     return column;
 }
 
@@ -30,6 +31,7 @@ int insert_value(COLUMN *column, void *value) {
 
     COL_TYPE *new_entry = (COL_TYPE *) malloc(sizeof(COL_TYPE));
     column->data[column->size] = new_entry;
+    column->index[column->size] = column->size;
 
     // Insert the value based on its type
     switch (column->column_type) {
@@ -91,28 +93,28 @@ int insert_value(COLUMN *column, void *value) {
 }
 
 
-void convert_value(COLUMN *col, unsigned long long int i, char *str, int size) {
-    switch(col->column_type) {
+void convert_value(COLUMN *column, unsigned long long int i, char *str, int size) {
+    switch(column->column_type) {
         case NULLVAL:
             snprintf(str, size, "NULL");
             break;
         case UINT:
-            snprintf(str, size, "%u", col->data[i]->uint_value);
+            snprintf(str, size, "%u", column->data[i]->uint_value);
             break;
         case INT:
-            snprintf(str, size, "%d",col->data[i]->int_value);
+            snprintf(str, size, "%d",column->data[i]->int_value);
             break;
         case CHAR:
-            snprintf(str, size, "%c", col->data[i]->char_value);
+            snprintf(str, size, "%c", column->data[i]->char_value);
             break;
         case FLOAT:
-            snprintf(str, size, "%f", col->data[i]->float_value);
+            snprintf(str, size, "%f", column->data[i]->float_value);
             break;
         case DOUBLE:
-            snprintf(str, size, "%lf", col->data[i]->double_value);
+            snprintf(str, size, "%lf", column->data[i]->double_value);
             break;
         case STRING:
-            snprintf(str, size, "%s", col->data[i]->string_value);
+            snprintf(str, size, "%s", column->data[i]->string_value);
             break;
 
         default:
@@ -121,7 +123,7 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size) {
 }
 
 void print_col(COLUMN *column) {
-    for (unsigned int i = 0; i < column->size; i++) {
+    for (int i = 0; i < column->size; i++) {
         printf("[%d] ", i);
 
         if (column->data[i] == NULL) {
