@@ -1,49 +1,16 @@
 
-# Mandatory functions
+### 1. Missing functions in main
+* 3  - Hard fill a CDATAFRAME
+* 12 - Check if a value exists in a CDATAFRAME
+* 14 - Replace a value in a CDATAFRAME
+* 18 - Count cells in a CDATAFRAME based on a condition
+* 24 - Search for a value in a column
+* (Missing functions)
 
-* ~~create_column~~
-* ~~insert_value~~
-* ~~convert_value~~
-* ~~print_col~~
+### 1. Missing functions
 
-# Developing basic functions 
-### 1. Filling
-* ~~Creation of an empty CDataframe~~
-* ~~Filling in the CDataframe with user input~~
 * Hard filling of the CDataframe
-
-
-### 2. ~~Displaying~~
-* ~~Display the entire CDataframe~~
-* ~~Dispalay a part of the CDataframe rows according to a user-provided limit~~
-* ~~Display a part of the columns of the CDataframe according to a limit supplied by the user~~
-
-### 3. Usual operations
-* ~~Add a row of values to the CDataframe~~
-* ~~Delete a row of values from the CDataframe~~
-* ~~Add a column to the CDataframe~~
-* ~~Delete a column from the CDataframe~~
-* ~~Rename the title of a column in the CDataframe~~
-* ~~Check the existence of a value (search) in the CDataframe~~
-* ~~Replace the value in a CDataframe cell using its row and column number~~
-* ~~Display column names~~
-
-### 4. Analysis and statistics
-* ~~Display the number of rows~~
-* ~~Display the number of columns~~
-* ~~Return the number of values that are greater than x (x given as a parameter).~~
-* ~~Return the number of values that are less than x (x given as a parameter).~~
-* ~~Return the number of values which are equal to x (x given as a parameter).~~
-
-# Sort a column
-* ~~Insertion sort and Quick sort in descending~~ and ascending order
-* ~~Display the contents of a sorted column~~
-* ~~Delete column index~~
-* ~~Check if a column has an index~~
-* ~~Update an index~~
 * Dichotomous search
 
-# Advanced functionalities
-* Concatenation
-* Join
+
 
