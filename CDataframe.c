@@ -225,6 +225,7 @@ void add_column_to_cdataframe(CDATAFRAME* cdataframe){
     printf("\n1-NULLVAL\n2-UINT\n3-INT\n4-CHAR\n5-FLOAT\n6-DOUBLE\n7-STRING\n\nEnter the type of data for column %s:", title);
     scanf("%d", (int *)&column_type);
     COLUMN* new_column = create_column(column_type, title);
+    cdataframe->number_rows++;
     for (int i = 0; i < cdataframe->number_rows; i++) {
         switch (column_type) {
             case NULLVAL:{

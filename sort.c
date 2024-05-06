@@ -1,8 +1,10 @@
 #include "column.h"
+#include "sort.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
-void swap(int *a, int *b){
+void swap(unsigned long long int *a, unsigned long long int *b){
     int temp = *a;
     *a = *b;
     *b = temp;
