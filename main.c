@@ -173,7 +173,77 @@ int main() {
                 break;
 
             case 12:
-                // Check if a value exist
+                if (cdataframe==NULL){
+                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                }
+                else{
+                    ENUM_TYPE data_type;
+                    void* val_check_cdataframe;
+                    printf("\n1-NULLVAL\n2-UINT\n3-INT\n4-CHAR\n5-FLOAT\n6-DOUBLE\n7-STRING\n\nEnter the type of data to seach for:");
+                    scanf("%d", (int *)&data_type);
+                    switch (data_type) {
+                        case NULLVAL: {
+                            val_check_cdataframe=NULL;
+                            break;
+                        }
+                        case UINT: {
+                            unsigned int uint_value;
+                            printf("Enter the unsigned integer value to search for: \n");
+                            scanf("%u", &uint_value);
+                            val_check_cdataframe = malloc(sizeof(unsigned int));
+                            *((unsigned int*)val_check_cdataframe) = uint_value;
+                            break;
+                        }
+                        case INT: {
+                            int int_value;
+                            printf("Enter the integer value to search for: \n");
+                            scanf("%d", &int_value);
+                            val_check_cdataframe = malloc(sizeof(int));
+                            *((int*)val_check_cdataframe) = int_value;
+                            break;
+                        }
+                        case CHAR: {
+                            char char_value;
+                            printf("Enter the character value to search for: \n");
+                            scanf(" %c", &char_value);
+                            val_check_cdataframe = malloc(sizeof(char));
+                            *((char*)val_check_cdataframe) = char_value;
+                            break;
+                        }
+                        case FLOAT: {
+                            float float_value;
+                            printf("Enter the float value to search for: \n");
+                            scanf("%f", &float_value);
+                            val_check_cdataframe = malloc(sizeof(float));
+                            *((float*)val_check_cdataframe) = float_value;
+                            break;
+                        }
+                        case DOUBLE: {
+                            double double_value;
+                            printf("Enter the double value to search for: \n");
+                            scanf("%lf", &double_value);
+                            val_check_cdataframe = malloc(sizeof(double));
+                            *((double*)val_check_cdataframe) = double_value;
+                            break;
+                        }
+                        case STRING: {
+                            char* string_value = (char*)malloc(sizeof(char) * 100);
+                            printf("Enter the string value to search for: \n");
+                            scanf("%s", string_value);
+                            val_check_cdataframe = string_value;
+                            break;
+                        }
+                        default:
+                            printf("Unsupported type, try again\n");
+                            break;
+                    }
+                    if(check_if_value_exists_in_cdataframe(cdataframe, data_type, val_check_cdataframe)==1){
+                        printf("Value exist in the CDataframe\n");
+                    }
+                    else if(check_if_value_exists_in_cdataframe(cdataframe, data_type, val_check_cdataframe)==-1){
+                        printf("Value does not exist in the CDataframe\n");
+                    }
+                }
                 break;
 
             case 13:
@@ -194,124 +264,269 @@ int main() {
                 if (cdataframe==NULL){
                     printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
                 }
-                else{
+                else {
                     printf("Enter a column number: ");
                     scanf("%d", &cdataframe_index_1);
                     printf("Enter a row number: ");
                     scanf("%d", &cdataframe_index_2);
-                    //replace_value(cdataframe,cdataframe_index_1, cdataframe_index_2, ENUM_TYPE value_type, void* new_val);
-                    printf("Not finished");
-                    break;
-
-                    case 15:
-                        if (cdataframe==NULL){
-                            printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    ENUM_TYPE value_type = cdataframe->columns[cdataframe_index_1]->column_type;
+                    void* new_value;
+                    switch (value_type) {
+                        case NULLVAL: {
+                            printf("NULLVAL type is not supported\n");
+                            break;
                         }
-                        else{
-                            display_number_of_rows(cdataframe);
+                        case UINT: {
+                            unsigned int new_uint_value;
+                            printf("Enter a new unsigned integer value: ");
+                            scanf("%u", &new_uint_value);
+                            new_value = malloc(sizeof(unsigned int));
+                            *((unsigned int*)new_value) = new_uint_value;
+                            break;
                         }
-                    break;
-
-                    case 16:
-                        if (cdataframe==NULL){
-                            printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                        case INT: {
+                            int new_int_value;
+                            printf("Enter a new integer value: ");
+                            scanf("%d", &new_int_value);
+                            new_value = malloc(sizeof(int));
+                            *((int*)new_value) = new_int_value;
+                            break;
                         }
-                        else{
-                            display_number_of_columns(cdataframe);
+                        case CHAR: {
+                            char new_char_value;
+                            printf("Enter a new character value: ");
+                            scanf(" %c", &new_char_value);
+                            new_value = malloc(sizeof(char));
+                            *((char*)new_value) = new_char_value;
+                            break;
                         }
-                    break;
-
-                    case 17:
-                        if (cdataframe==NULL){
-                            printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                        case FLOAT: {
+                            float new_float_value;
+                            printf("Enter a new float value: ");
+                            scanf("%f", &new_float_value);
+                            new_value = malloc(sizeof(float));
+                            *((float*)new_value) = new_float_value;
+                            break;
                         }
-                        else{
-                            display_name_of_columns(cdataframe);
+                        case DOUBLE: {
+                            double new_double_value;
+                            printf("Enter a new double value: ");
+                            scanf("%lf", &new_double_value);
+                            new_value = malloc(sizeof(double));
+                            *((double*)new_value) = new_double_value;
+                            break;
                         }
-                    break;
-
-                    case 18:
-                        // Count cells condition
-                        break;
-
-                    case 19:
-                        if (cdataframe==NULL){
-                            printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                        case STRING: {
+                            char* new_string_value = (char*)malloc(sizeof(char) * 100);
+                            printf("Enter a new string value: ");
+                            scanf("%s", new_string_value);
+                            new_value = new_string_value;
+                            break;
                         }
-                        else {
-                            printf("Enter a column number: ");
-                            scanf("%d", &cdataframe_index_1);
-                            sort(cdataframe->columns[cdataframe_index_1]);
-                        }
-                    break;
-
-                    case 20:
-                        if (cdataframe==NULL){
-                            printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
-                        }
-                        else {
-                            printf("Enter a column number: ");
-                            scanf("%d", &cdataframe_index_1);
-                            print_col_by_index(cdataframe->columns[cdataframe_index_1]);
-                        }
-                    break;
-
-                    case 21:
-                        if (cdataframe==NULL){
-                            printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
-                        }
-                        else {
-                            printf("Enter a column number: ");
-                            scanf("%d", &cdataframe_index_1);
-                            erase_index(cdataframe->columns[cdataframe_index_1]);
-                            if (cdataframe->columns[0]->index == NULL) {
-                                printf("Memory has been successfully freed\n");
-                            } else {
-                                printf("Memory has not been freed\n");
-                            }
-                        }
-                    break;
-
-                    case 22:
-                        if (cdataframe==NULL){
-                            printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
-                        }
-                        else {
-                            printf("Enter a column number: ");
-                            scanf("%d", &cdataframe_index_1);
-                            int index_status = check_index(cdataframe->columns[cdataframe_index_1]);
-                            if (index_status == 1) {
-                                printf("Index is correct\n");
-                            } else if (index_status == -1) {
-                                printf("Index exists but is invalid\n");
-                            } else {
-                                printf("Index does not exist\n");
-                            }
-                        }
-                    break;
-
-                    case 23:
-                        if (cdataframe==NULL){
-                            printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
-                        }
-                        else {
-                            printf("Enter a column number: ");
-                            scanf("%d", &cdataframe_index_1);
-                            update_index(cdataframe->columns[cdataframe_index_1]);
-                        }
-                    break;
-
-                    case 24:
-                        // Search for a value
-                        break;
-
-                    case 25:
-                        return 0;
-
-                    default:
-                        printf("Invalid number, try again\n");
-                    break;
+                    }
+                    replace_value(cdataframe, cdataframe_index_1, cdataframe_index_2, value_type, new_value);
                 }
+                break;
+
+            case 15:
+                if (cdataframe==NULL){
+                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                }
+                else{
+                    display_number_of_rows(cdataframe);
+                }
+                break;
+
+            case 16:
+                if (cdataframe==NULL){
+                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                }
+                else{
+                    display_number_of_columns(cdataframe);
+                }
+                break;
+
+            case 17:
+                if (cdataframe==NULL){
+                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                }
+                else{
+                    display_name_of_columns(cdataframe);
+                }
+                break;
+
+            case 18:
+                if (cdataframe==NULL){
+                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                }
+                else {
+                    ENUM_TYPE data_type;
+                    void *value_to_compare;
+                    int op_choice;
+                    char op;
+                    printf("\n1-NULLVAL\n2-UINT\n3-INT\n4-CHAR\n5-FLOAT\n6-DOUBLE\n7-STRING\n\nEnter the type of data to compare:");
+                    scanf("%d", (int *) &data_type);
+                    switch (data_type) {
+                        case NULLVAL:{
+                            printf("Can't operate comparisons with NULL values\n");
+                            break;
+                        }
+                        case UINT: {
+                            unsigned int uint_value;
+                            printf("Enter x (an unsigned integer): ");
+                            scanf("%u", &uint_value);
+                            value_to_compare = malloc(sizeof(unsigned int));
+                            *((unsigned int *) value_to_compare) = uint_value;
+                            break;
+                        }
+                        case INT: {
+                            int int_value;
+                            printf("Enter x (an integer): ");
+                            scanf("%d", &int_value);
+                            value_to_compare = malloc(sizeof(int));
+                            *((int *) value_to_compare) = int_value;
+                            break;
+                        }
+                        case CHAR: {
+                            char char_value;
+                            printf("Enter x (a character): ");
+                            scanf(" %c", &char_value);
+                            value_to_compare = malloc(sizeof(char));
+                            *((char *) value_to_compare) = char_value;
+                            break;
+                        }
+                        case FLOAT: {
+                            float float_value;
+                            printf("Enter x (a float): ");
+                            scanf("%f", &float_value);
+                            value_to_compare = malloc(sizeof(float));
+                            *((float *) value_to_compare) = float_value;
+                            break;
+                        }
+                        case DOUBLE: {
+                            double double_value;
+                            printf("Enter x (a double): ");
+                            scanf("%lf", &double_value);
+                            value_to_compare = malloc(sizeof(double));
+                            *((double *) value_to_compare) = double_value;
+                            break;
+                        }
+                        case STRING: {
+                            char *string_value = (char *) malloc(sizeof(char) * 100);
+                            printf("Enter x (a string): ");
+                            scanf("%s", string_value);
+                            value_to_compare = string_value;
+                            break;
+                        }
+                        default:
+                            printf("Unsupported type, try again\n");
+                            break;
+                    }
+                    if(data_type!=NULLVAL){
+                        printf("\n1- equal to (=)\n2- greater than (>)\n3- less than (<)\n\nChoose one operator:");
+                        scanf("%d", &op_choice);
+                        // Need to handle errors
+                        switch (op_choice){
+                            case 1:
+                                op = '=';
+                                printf("There is %d values equal to x\n", count_cells_condition(cdataframe, data_type, value_to_compare, op), op);
+                                break;
+                            case 2:
+                                op = '>';
+                                printf("There is %d values greater than x\n", count_cells_condition(cdataframe, data_type, value_to_compare, op), op);
+                                break;
+                            case 3:
+                                op = '<';
+                                printf("There is %d values less than x\n", count_cells_condition(cdataframe, data_type, value_to_compare, op), op);
+                                break;
+                            default:
+                                printf("Invalid choice\n");
+                                break;
+                        }
+                    }
+                }
+                break;
+
+            case 19:
+                if (cdataframe==NULL){
+                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                }
+                else {
+                    printf("Enter a column number: ");
+                    scanf("%d", &cdataframe_index_1);
+                    sort(cdataframe->columns[cdataframe_index_1]);
+                }
+                break;
+
+            case 20:
+                if (cdataframe==NULL){
+                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                }
+                else {
+                    printf("Enter a column number: ");
+                    scanf("%d", &cdataframe_index_1);
+                    print_col_by_index(cdataframe->columns[cdataframe_index_1]);
+                }
+                break;
+
+            case 21:
+                if (cdataframe==NULL){
+                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                }
+                else {
+                    printf("Enter a column number: ");
+                    scanf("%d", &cdataframe_index_1);
+                    erase_index(cdataframe->columns[cdataframe_index_1]);
+                    if (cdataframe->columns[0]->index == NULL) {
+                        printf("Memory has been successfully freed\n");
+                    }
+                    else {
+                        printf("Memory has not been freed\n");
+                    }
+                }
+                break;
+
+            case 22:
+                if (cdataframe==NULL){
+                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                }
+                else {
+                    printf("Enter a column number: ");
+                    scanf("%d", &cdataframe_index_1);
+                    int index_status = check_index(cdataframe->columns[cdataframe_index_1]);
+                    if (index_status == 1) {
+                        printf("Index is correct\n");
+                    }
+                    else if (index_status == -1) {
+                        printf("Index exists but is invalid\n");
+                    }
+                    else {
+                        printf("Index does not exist\n");
+                    }
+                }
+                break;
+
+            case 23:
+                if (cdataframe==NULL){
+                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                }
+                else {
+                    printf("Enter a column number: ");
+                    scanf("%d", &cdataframe_index_1);
+                    update_index(cdataframe->columns[cdataframe_index_1]);
+                }
+                break;
+
+            case 24:
+                // Search for a value
+                break;
+
+            case 25:
+                return 0;
+
+            default:
+                printf("Invalid number, try again\n");
+                break;
         }
     }
     return 0;

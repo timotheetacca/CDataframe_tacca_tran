@@ -305,7 +305,8 @@ void rename_column(CDATAFRAME* cdataframe, int column, char* new_title){
     }
     cdataframe->columns[column]->title = new_title;
 }
-int check_if_value_exists(CDATAFRAME* cdataframe, ENUM_TYPE value_type, void* value) {
+
+int check_if_value_exists_in_cdataframe(CDATAFRAME* cdataframe, ENUM_TYPE value_type, void* value) {
     // Returns 1 if the value exist in the CDataframe, else returns -1
     for (int i = 0; i < cdataframe->number_columns; i++) {
         if (cdataframe->columns[i]->column_type == value_type) {
@@ -391,14 +392,7 @@ int count_cells_condition(CDATAFRAME* cdataframe, ENUM_TYPE x_type, void* x, cha
             for (int j = 0; j < cdataframe->columns[i]->size; j++) {
                 switch (x_type) {
                     case NULLVAL:
-                        if (op == '=' && cdataframe->columns[i]->data[j] == NULL)
-                            count++;
-                        else if (op == '>')
-                            printf("Comparison '>' not supported for NULL values");
-                        else if (op == '<')
-                            printf("Comparison '<' not supported for NULL values");
-                        else if (op == '=' && op == '>' && op!='<')
-                            printf("Invalid comparison operation\n");
+                        printf("Unsupported type, try again\n");
                         break;
                     case UINT:
                         if (op == '=' && *((unsigned int*)cdataframe->columns[i]->data[j]) == *((unsigned int*)x))
@@ -448,7 +442,7 @@ int count_cells_condition(CDATAFRAME* cdataframe, ENUM_TYPE x_type, void* x, cha
                         else if (op == '<' && *((double*)cdataframe->columns[i]->data[j]) < *((double*)x))
                             count++;
                         else if (op == '=' && op == '>' && op!='<')
-                            printf( "Invalid comparison operation\n");
+                            printf("Invalid comparison operation\n");
                         break;
                     case STRING:{
                         char *str1 = (char*)cdataframe->columns[i]->data[j];
@@ -494,4 +488,8 @@ int count_cells_condition(CDATAFRAME* cdataframe, ENUM_TYPE x_type, void* x, cha
         }
     }
     return count;
+}
+
+int search_value_in_column(COLUMN *col, void *val){
+
 }
