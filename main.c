@@ -423,7 +423,7 @@ int main() {
                             break;
                     }
                     if(data_type!=NULLVAL){
-                        printf("\n1- equal to (=)\n2- greater than (>)\n3- less than (<)\n\nChoose one operator:");
+                        printf("\n1- equal to (=)\n2- greater than (>)\n3- less than (<)\nChoose one operator:");
                         scanf("%d", &op_choice);
                         // Need to handle errors
                         switch (op_choice){
@@ -452,9 +452,24 @@ int main() {
                     printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
                 }
                 else {
+                    int sort_dir, dir_choice;
                     printf("Enter a column number: ");
                     scanf("%d", &cdataframe_index_1);
-                    sort(cdataframe->columns[cdataframe_index_1]);
+                    printf("\n1- Ascending order\n2- Descending order\nChoose the order you want to sort in:");
+                    scanf("%d",&dir_choice);
+                    switch(dir_choice){
+                        case 1:
+                            sort_dir=ASC;
+                            sort(cdataframe->columns[cdataframe_index_1],sort_dir);
+                            break;
+                        case 2:
+                            sort_dir=DESC;
+                            sort(cdataframe->columns[cdataframe_index_1],sort_dir);
+                            break;
+                        default:
+                            printf("Invalid choice\n");
+                            break;
+                    }
                 }
                 break;
 
@@ -511,9 +526,24 @@ int main() {
                     printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
                 }
                 else {
+                    int sort_dir, dir_choice;
                     printf("Enter a column number: ");
                     scanf("%d", &cdataframe_index_1);
-                    update_index(cdataframe->columns[cdataframe_index_1]);
+                    printf("\n1- Ascending order\n2- Descending order\nChoose the order you want to sort in:");
+                    scanf("%d",&dir_choice);
+                    switch(dir_choice){
+                        case 1:
+                            sort_dir=ASC;
+                            update_index(cdataframe->columns[cdataframe_index_1],sort_dir);
+                            break;
+                        case 2:
+                            sort_dir=DESC;
+                            update_index(cdataframe->columns[cdataframe_index_1],sort_dir);
+                            break;
+                        default:
+                            printf("Invalid choice\n");
+                            break;
+                    }
                 }
                 break;
 
