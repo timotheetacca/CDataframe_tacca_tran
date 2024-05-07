@@ -5,7 +5,6 @@
 ### 1. Missing functions
 
 * Hard filling of the CDataframe
-* sort_dir of sort
 * Dichotomous search
 
 
