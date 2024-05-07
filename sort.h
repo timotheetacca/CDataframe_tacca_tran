@@ -15,6 +15,6 @@ void print_col_by_index(COLUMN *column);
 void erase_index(COLUMN *column);
 int check_index(COLUMN *column);
 void update_index(COLUMN *column, int sort_dir);
-int search_value_in_column(COLUMN *col, void *val);
+int search_value_in_column(COLUMN *column, void *value);
 
 #endif

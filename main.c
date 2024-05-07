@@ -548,7 +548,82 @@ int main() {
                 break;
 
             case 24:
-                // Search for a value
+                if (cdataframe==NULL){
+                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                }
+                else{
+                    COLUMN *column;
+                    printf("Enter a column number: ");
+                    scanf("%d", &cdataframe_index_1);
+                    column=cdataframe->columns[cdataframe_index_1];
+                    ENUM_TYPE column_type=column->column_type;
+                    void* value;
+                    switch (column_type) {
+                        case NULLVAL: {
+                            value=NULL;
+                            break;
+                        }
+                        case UINT: {
+                            unsigned int new_uint_value;
+                            printf("Enter an unsigned integer value: ");
+                            scanf("%u", &new_uint_value);
+                            value = malloc(sizeof(unsigned int));
+                            *((unsigned int*)value) = new_uint_value;
+                            break;
+                        }
+                        case INT: {
+                            int new_int_value;
+                            printf("Enter an integer value: ");
+                            scanf("%d", &new_int_value);
+                            value = malloc(sizeof(int));
+                            *((int*)value) = new_int_value;
+                            break;
+                        }
+                        case CHAR: {
+                            char new_char_value;
+                            printf("Enter a character value: ");
+                            scanf(" %c", &new_char_value);
+                            value = malloc(sizeof(char));
+                            *((char*)value) = new_char_value;
+                            break;
+                        }
+                        case FLOAT: {
+                            float new_float_value;
+                            printf("Enter a float value: ");
+                            scanf("%f", &new_float_value);
+                            value = malloc(sizeof(float));
+                            *((float*)value) = new_float_value;
+                            break;
+                        }
+                        case DOUBLE: {
+                            double new_double_value;
+                            printf("Enter a double value: ");
+                            scanf("%lf", &new_double_value);
+                            value = malloc(sizeof(double));
+                            *((double*)value) = new_double_value;
+                            break;
+                        }
+                        case STRING: {
+                            char* new_string_value = (char*)malloc(sizeof(char) * 100);
+                            printf("Enter a string value: ");
+                            scanf("%s", new_string_value);
+                            value = new_string_value;
+                            break;
+                        }
+                        default:
+                            printf("Unsupported type, try again\n");
+                            break;
+                    }
+                    if(search_value_in_column(column, value)==1){
+                        printf("Value is found\n");
+                    }
+                    else if(search_value_in_column(column, value)==0){
+                        printf("Value is not found\n");
+                    }
+                    else if(search_value_in_column(column, value)==-1){
+                        printf("Column is not sorted\n");
+                    }
+                }
                 break;
 
             case 25:

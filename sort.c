@@ -298,6 +298,58 @@ void update_index(COLUMN *column, int sort_dir) {
     asc_insertionsort(column, column->size);
 }
 
-int search_value_in_column(COLUMN *col, void *val){
-
+int search_value_in_column(COLUMN *column, void *value){
+    if (column != NULL && column->index != NULL) {
+        if(column->valid_index != 1){
+            return -1;
+        }
+        else{
+            for (int i = 0; i < column->size; i++){
+                ENUM_TYPE column_type=column->column_type;
+                switch (column_type) {
+                    case NULLVAL:
+                        if (column->data[i] == NULL)
+                            return 1;
+                        break;
+                    case UINT:
+                        if (*((unsigned int*)column->data[i]) == *((unsigned int*)value))
+                            return 1;
+                        break;
+                    case INT:
+                        if (*((int*)column->data[i]) ==*((int*)value))
+                            return 1;
+                        break;
+                    case CHAR:
+                        if (*((char*)column->data[i]) == *((char*)value))
+                            return 1;
+                        break;
+                    case FLOAT:
+                        if (*((float*)column->data[i]) == *((float*)value))
+                            return 1;
+                        break;
+                    case DOUBLE:
+                        if (*((double*)column->data[i]) == *((double*)value))
+                            return 1;
+                        break;
+                    case STRING: {
+                        char *str1 = (char*)column->data[i];
+                        char *str2 = (char*)value;
+                        int index = 0;
+                        while (str1[index] != '\0' && str2[index] != '\0') {
+                            if (str1[index] != str2[index])
+                                break;
+                            index++;
+                        }
+                        if (str1[index] == '\0' && str2[index] == '\0')
+                            return 1;
+                        break;
+                    }
+                    default:
+                        printf("Unsupported type, try again\n");
+                        return -2;
+                }
+            }
+        }
+    }
+    return 0;
 }
