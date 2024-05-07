@@ -5,7 +5,5 @@
 ### 1. Missing functions
 
 * Hard filling of the CDataframe
-* Dichotomous search
-
 
 
