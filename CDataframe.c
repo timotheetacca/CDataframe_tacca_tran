@@ -233,6 +233,7 @@ void delete_row_from_cdataframe(CDATAFRAME* cdataframe, int row) {
     }
     // Decrement the number of rows in the Cdataframe
     cdataframe->number_rows--;
+    cdataframe->columns[row]->valid_index = -1;
     if (cdataframe->number_rows<=0){
         delete_cdataframe(cdataframe);
     }
