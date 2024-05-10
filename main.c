@@ -119,6 +119,7 @@ int main() {
                 }
                 else{
                     add_row_to_cdataframe(cdataframe);
+                    printf("\nA row has been added\n");
                 }
                 break;
 
@@ -133,6 +134,7 @@ int main() {
                     printf("Enter a column number: ");
                     scanf("%d", &cdataframe_index_1);
                     delete_row_from_cdataframe( cdataframe, cdataframe_index_1);
+                    printf("\nA row has been deleted\n");
                 }
                 break;
 
@@ -142,6 +144,7 @@ int main() {
                 }
                 else{
                     add_column_to_cdataframe(cdataframe);
+                    printf("\nA column has been added\n");
                 }
                 break;
 
@@ -156,6 +159,7 @@ int main() {
                     printf("Enter a column number: ");
                     scanf("%d", &cdataframe_index_1);
                     delete_column_from_cdataframe( cdataframe, cdataframe_index_1);
+                    printf("\nA column has been deleted\n");
                 }
                 break;
 
@@ -172,6 +176,7 @@ int main() {
                     printf("Enter the new title of column %d: ", cdataframe_index_1);
                     scanf("%s", string);
                     rename_column(cdataframe, cdataframe_index_1, string);
+                    printf("\nA column has been renamed\n");
                 }
                 break;
 
@@ -328,6 +333,7 @@ int main() {
                         }
                     }
                     replace_value(cdataframe, cdataframe_index_1, cdataframe_index_2, value_type, new_value);
+                    printf("\nA value has been replaced\n");
                 }
                 break;
 
@@ -464,10 +470,12 @@ int main() {
                         case 1:
                             sort_dir=ASC;
                             sort(cdataframe->columns[cdataframe_index_1],sort_dir);
+                            printf("\nA column has been sorted\n");
                             break;
                         case 2:
                             sort_dir=DESC;
                             sort(cdataframe->columns[cdataframe_index_1],sort_dir);
+                            printf("\nA column has been sorted\n");
                             break;
                         default:
                             printf("Invalid choice\n");
@@ -538,10 +546,12 @@ int main() {
                         case 1:
                             sort_dir=ASC;
                             update_index(cdataframe->columns[cdataframe_index_1],sort_dir);
+                            printf("\nA index has been updated\n");
                             break;
                         case 2:
                             sort_dir=DESC;
                             update_index(cdataframe->columns[cdataframe_index_1],sort_dir);
+                            printf("\nA index has been updated\n");
                             break;
                         default:
                             printf("Invalid choice\n");
@@ -618,13 +628,13 @@ int main() {
                             break;
                     }
                     if(search_value_in_column(column, value)==1){
-                        printf("Value is found\n");
+                        printf("Value has been found\n");
                     }
                     else if(search_value_in_column(column, value)==0){
-                        printf("Value is not found\n");
+                        printf("Value has not been found\n");
                     }
                     else if(search_value_in_column(column, value)==-1){
-                        printf("Column is not sorted\n");
+                        printf("Column is not , please sort it using command number 19 or 23\n");
                     }
                 }
                 break;
