@@ -20,6 +20,24 @@ CDATAFRAME* create_cdataframe() {
     return cdataframe;
 }
 
+void delete_cdataframe(CDATAFRAME* cdataframe) {
+    for (int i = 0; i < cdataframe->number_columns; i++) {
+        free(cdataframe->columns[i]->title);
+        for (int j = 0; j < cdataframe->columns[i]->size; j++) {
+            free(cdataframe->columns[i]->data[j]);
+        }
+        free(cdataframe->columns[i]->data);
+        free(cdataframe->columns[i]->index);
+        free(cdataframe->columns[i]);
+    }
+
+    free(cdataframe->columns);
+    cdataframe->number_columns= 0;
+    cdataframe->number_rows = 0;
+    cdataframe = NULL;
+}
+
+
 void fill_cdataframe(CDATAFRAME* cdataframe) {
     printf("Enter the number of columns in the dataframe:");
     scanf("%d", &cdataframe->number_columns);
@@ -215,6 +233,9 @@ void delete_row_from_cdataframe(CDATAFRAME* cdataframe, int row) {
     }
     // Decrement the number of rows in the Cdataframe
     cdataframe->number_rows--;
+    if (cdataframe->number_rows<=0){
+        delete_cdataframe(cdataframe);
+    }
 }
 
 void add_column_to_cdataframe(CDATAFRAME* cdataframe){
@@ -225,7 +246,9 @@ void add_column_to_cdataframe(CDATAFRAME* cdataframe){
     printf("\n1-NULLVAL\n2-UINT\n3-INT\n4-CHAR\n5-FLOAT\n6-DOUBLE\n7-STRING\n\nEnter the type of data for column %s:", title);
     scanf("%d", (int *)&column_type);
     COLUMN* new_column = create_column(column_type, title);
-    cdataframe->number_rows++;
+    if (cdataframe->number_rows==0){
+        cdataframe->number_rows++;
+    }
     for (int i = 0; i < cdataframe->number_rows; i++) {
         switch (column_type) {
             case NULLVAL:{
@@ -296,6 +319,9 @@ void delete_column_from_cdataframe(CDATAFRAME* cdataframe, int column){
     }
     // Decrement the number of columns in the Cdataframe
     cdataframe->number_columns--;
+    if (cdataframe->number_columns<=0){
+        delete_cdataframe(cdataframe);
+    }
 }
 
 void rename_column(CDATAFRAME* cdataframe, int column, char* new_title){
@@ -488,8 +514,4 @@ int count_cells_condition(CDATAFRAME* cdataframe, ENUM_TYPE x_type, void* x, cha
         }
     }
     return count;
-}
-
-int search_value_in_column(COLUMN *col, void *val){
-
 }

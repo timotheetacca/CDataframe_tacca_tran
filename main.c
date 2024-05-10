@@ -31,7 +31,7 @@ void print_function_table() {
     printf("22 - Check if index exists in a column\n");
     printf("23 - Update index of a column\n");
     printf("24 - Search for a value in a column\n");
-    printf("25 - Leave the program\n\n");
+    printf("25 - Leave the program\n");
 }
 
 int main() {
@@ -41,7 +41,7 @@ int main() {
 
     print_function_table();
     while (1) {
-        printf("Enter the number associated with the function. If you want the list of commands and their numbers, type 0 :");
+        printf("\nEnter the number associated with the function. If you want the list of commands and their numbers, type 0 :");
         scanf("%d", &option);
 
         switch (option) {
@@ -51,12 +51,12 @@ int main() {
 
             case 1:
                 cdataframe = create_cdataframe();
-                printf("\nA CDATAFRAME has been created\n\n");
+                printf("\nA CDATAFRAME has been created\n");
                 break;
 
             case 2:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else{
                     fill_cdataframe(cdataframe);
@@ -65,7 +65,7 @@ int main() {
 
             case 3:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else{
                     // Hard fill
@@ -74,7 +74,10 @@ int main() {
 
             case 4:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
+                }
+                else if (cdataframe->number_columns==0){
+                    printf("\n\nTo use this function you need to create have at least 1 column in your CDATAFRAME, which you can do using command number 2 or 9\n");
                 }
                 else{
                     display_cdataframe(cdataframe);
@@ -83,7 +86,7 @@ int main() {
 
             case 5:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else{
                     printf("Enter a starting index :");
@@ -96,7 +99,7 @@ int main() {
 
             case 6:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else{
                     printf("Enter a starting index :");
@@ -109,10 +112,10 @@ int main() {
 
             case 7:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else if (cdataframe->number_columns==0){
-                    printf("\nTo use this function you need to create have at least 1 column in your CDATAFRAME, which you can do using command number 2 or 9\n\n");
+                    printf("\n\nTo use this function you need to create have at least 1 column in your CDATAFRAME, which you can do using command number 2 or 9\n");
                 }
                 else{
                     add_row_to_cdataframe(cdataframe);
@@ -121,10 +124,10 @@ int main() {
 
             case 8:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else if (cdataframe->number_columns==0){
-                    printf("\nTo use this function you need to create have at least 1 column in your CDATAFRAME, which you can do using command number 2 or 9\n\n");
+                    printf("\n\nTo use this function you need to create have at least 1 column in your CDATAFRAME, which you can do using command number 2 or 9\n");
                 }
                 else{
                     printf("Enter a column number: ");
@@ -135,7 +138,7 @@ int main() {
 
             case 9:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else{
                     add_column_to_cdataframe(cdataframe);
@@ -144,10 +147,10 @@ int main() {
 
             case 10:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else if (cdataframe->number_columns==0){
-                    printf("\nTo use this function you need to create have at least 1 column in your CDATAFRAME, which you can do using command number 2 or 9\n\n");
+                    printf("\n\nTo use this function you need to create have at least 1 column in your CDATAFRAME, which you can do using command number 2 or 9\n");
                 }
                 else{
                     printf("Enter a column number: ");
@@ -158,10 +161,10 @@ int main() {
 
             case 11:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else if (cdataframe->number_columns==0){
-                    printf("\nTo use this function you need to create have at least 1 column in your CDATAFRAME, which you can do using command number 2 or 9\n\n");
+                    printf("\n\nTo use this function you need to create have at least 1 column in your CDATAFRAME, which you can do using command number 2 or 9\n");
                 }
                 else {
                     printf("Enter a column number: ");
@@ -174,12 +177,12 @@ int main() {
 
             case 12:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else{
                     ENUM_TYPE data_type;
                     void* val_check_cdataframe;
-                    printf("\n1-NULLVAL\n2-UINT\n3-INT\n4-CHAR\n5-FLOAT\n6-DOUBLE\n7-STRING\n\nEnter the type of data to seach for:");
+                    printf("\n1-NULLVAL\n2-UINT\n3-INT\n4-CHAR\n5-FLOAT\n6-DOUBLE\n7-STRING\nEnter the type of data to seach for:");
                     scanf("%d", (int *)&data_type);
                     switch (data_type) {
                         case NULLVAL: {
@@ -248,7 +251,7 @@ int main() {
 
             case 13:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else {
                     printf("Enter a column number: ");
@@ -262,7 +265,7 @@ int main() {
 
             case 14:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else {
                     printf("Enter a column number: ");
@@ -330,7 +333,7 @@ int main() {
 
             case 15:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else{
                     display_number_of_rows(cdataframe);
@@ -339,7 +342,7 @@ int main() {
 
             case 16:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else{
                     display_number_of_columns(cdataframe);
@@ -348,7 +351,7 @@ int main() {
 
             case 17:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else{
                     display_name_of_columns(cdataframe);
@@ -357,14 +360,14 @@ int main() {
 
             case 18:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else {
                     ENUM_TYPE data_type;
                     void *value_to_compare;
                     int op_choice;
                     char op;
-                    printf("\n1-NULLVAL\n2-UINT\n3-INT\n4-CHAR\n5-FLOAT\n6-DOUBLE\n7-STRING\n\nEnter the type of data to compare:");
+                    printf("\n1-NULLVAL\n2-UINT\n3-INT\n4-CHAR\n5-FLOAT\n6-DOUBLE\n7-STRING\nEnter the type of data to compare:");
                     scanf("%d", (int *) &data_type);
                     switch (data_type) {
                         case NULLVAL:{
@@ -449,7 +452,7 @@ int main() {
 
             case 19:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else {
                     int sort_dir, dir_choice;
@@ -475,7 +478,7 @@ int main() {
 
             case 20:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else {
                     printf("Enter a column number: ");
@@ -486,7 +489,7 @@ int main() {
 
             case 21:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else {
                     printf("Enter a column number: ");
@@ -503,7 +506,7 @@ int main() {
 
             case 22:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else {
                     printf("Enter a column number: ");
@@ -523,7 +526,7 @@ int main() {
 
             case 23:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else {
                     int sort_dir, dir_choice;
@@ -549,7 +552,7 @@ int main() {
 
             case 24:
                 if (cdataframe==NULL){
-                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n\n");
+                    printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else{
                     COLUMN *column;

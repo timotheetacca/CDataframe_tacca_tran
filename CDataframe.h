@@ -9,6 +9,7 @@ typedef struct {
 } CDATAFRAME;
 
 CDATAFRAME* create_cdataframe();
+void delete_cdataframe(CDATAFRAME* cdataframe);
 void fill_cdataframe(CDATAFRAME* cdataframe);
 void display_cdataframe(CDATAFRAME* cdataframe);
 void display_limited_rows_cdataframe(CDATAFRAME* cdataframe, int start, int end);
