@@ -124,6 +124,96 @@ void fill_cdataframe(CDATAFRAME* cdataframe) {
     }
 }
 
+void hard_fill(CDATAFRAME* cdataframe){
+    cdataframe->number_columns=7;
+    cdataframe->number_rows=7;
+    cdataframe->columns = (COLUMN **)malloc(cdataframe->number_columns * sizeof(COLUMN *));
+    for (int i = 0; i < cdataframe->number_columns; i++) {
+        char *title = (char *) malloc(sizeof(char) * 100);
+        ENUM_TYPE column_type;
+        switch (i) {
+            case 0: {
+                title = "NULL VALLUES";
+                column_type = NULLVAL;
+                cdataframe->columns[i] = create_column(column_type, title);
+                for (int j = 0; j < cdataframe->number_rows; j++) {
+                    insert_value(cdataframe->columns[i], NULL);
+                }
+                break;
+            }
+            case 1: {
+                title = "UNSIGNED INTEGERS";
+                column_type = UINT;
+                cdataframe->columns[i] = create_column(column_type, title);
+                unsigned int value = 1;
+                for (int j = 0; j < cdataframe->number_rows; j++) {
+                    insert_value(cdataframe->columns[i], &value);
+                    value++;
+                }
+                break;
+            }
+            case 2: {
+                title = "INTEGERS";
+                column_type = INT;
+                cdataframe->columns[i] = create_column(column_type, title);
+                int value = 1;
+                for (int j = 0; j < cdataframe->number_rows; j++) {
+                    insert_value(cdataframe->columns[i], &value);
+                    value++;
+                }
+                break;
+            }
+            case 3: {
+                title = "CHARACTERS";
+                column_type = CHAR;
+                cdataframe->columns[i] = create_column(column_type, title);
+                char value = 'a';
+                for (int j = 0; j < cdataframe->number_rows; j++) {
+                    insert_value(cdataframe->columns[i], &value);
+                    value++;
+                }
+                break;
+            }
+            case 4: {
+                title = "FL0ATS";
+                column_type = FLOAT;
+                cdataframe->columns[i] = create_column(column_type, title);
+                float value = 0.1;
+                for (int j = 0; j < cdataframe->number_rows; j++) {
+                    insert_value(cdataframe->columns[i], &value);
+                    value=value+0.1;
+                }
+                break;
+            }
+            case 5: {
+                title = "DOUBLES";
+                column_type = DOUBLE;
+                cdataframe->columns[i] = create_column(column_type, title);
+                double value = 0.1;
+                for (int j = 0; j < cdataframe->number_rows; j++) {
+                    insert_value(cdataframe->columns[i], &value);
+                    value=value+0.1;
+                }
+                break;
+            }
+            case 6: {
+                title = "STRINGS";
+                column_type = STRING;
+                cdataframe->columns[i] = create_column(column_type, title);
+                char value[5]="aaaa",new_value[5];
+                insert_value(cdataframe->columns[i], &value);
+                for (int j = 0; j < cdataframe->number_rows; j++) {
+                    for (int k = 0; k < 4; k++) {
+                        new_value[k]=++value[k];
+                    }
+                    new_value[4] = '\0';
+                    insert_value(cdataframe->columns[i], &new_value);
+                }
+                break;
+            }
+        }
+    }
+}
 
 void display_cdataframe(CDATAFRAME* cdataframe) {
     for (int i = 0; i < cdataframe->number_columns; i++) {

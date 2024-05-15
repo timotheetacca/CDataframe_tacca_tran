@@ -68,7 +68,7 @@ int main() {
                     printf("\n\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
                 }
                 else{
-                    // Hard fill
+                    hard_fill(cdataframe);
                 }
                 break;
 
