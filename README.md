@@ -20,7 +20,7 @@ We decided to separate the project into branches. The `main` branch contains a s
 ## Download
 
 ### Git clone
-you can install the project using git clone :
+You have 2 options to install our project. You can install the core project using git clone :
 
 ```
 git clone https://github.com/timotheetacca/CDataframe_tacca_tran.git
@@ -32,7 +32,7 @@ git clone -b graphic_interface https://github.com/timotheetacca/CDataframe_tacca
 
 ### Install
 
-You can also directly install the latest release of our project from [here](https://github.com/timotheetacca/CDataframe_tacca_tran) 
+You can also directly install the latest release of our project from [here](https://github.com/timotheetacca/CDataframe_tacca_tran). Be sure to download the version of the project you want (`graphic_interface` or `main`)
 
 ![download_cd](https://github.com/timotheetacca/CDataframe_tacca_tran/assets/66522009/f9067b4c-72d6-43ac-88a9-c637147a1cb0)
 
