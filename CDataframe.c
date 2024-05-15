@@ -312,8 +312,10 @@ void add_row_to_cdataframe(CDATAFRAME* cdataframe) {
 
 
 void delete_row_from_cdataframe(CDATAFRAME* cdataframe, int row) {
-    if (row < 0 || row >= cdataframe->number_rows)
+    if (row < 0 || row >= cdataframe->number_rows){
+        printf("\nInvalid row index\n");
         return;
+    }
     for (int i = 0; i < cdataframe->number_columns; i++) {
         cdataframe->columns[i]->valid_index = -1;
         for (int j = row; j < cdataframe->number_rows - 1; j++) {
@@ -399,8 +401,10 @@ void add_column_to_cdataframe(CDATAFRAME* cdataframe){
 
 
 void delete_column_from_cdataframe(CDATAFRAME* cdataframe, int column){
-    if (column < 0 || column >= cdataframe->number_columns)
+    if (column < 0 || column >= cdataframe->number_columns){
+        printf("\nInvalid column index\n");
         return;
+    }
     for (int i = column; i < cdataframe->number_columns - 1; i++) {
         for (int j = 0; j < cdataframe->number_rows; j++) {
             cdataframe->columns[i]->column_type = cdataframe->columns[i+1]->column_type;
