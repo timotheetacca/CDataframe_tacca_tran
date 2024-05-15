@@ -28,9 +28,7 @@ git clone https://github.com/timotheetacca/CDataframe_tacca_tran.git
 Or git clone the `graphic_interface` branch :
 ```
 git clone -b graphic_interface https://github.com/timotheetacca/CDataframe_tacca_tran.git
-
 ```
-
 
 ### Install
 
@@ -46,7 +44,7 @@ Ensure `main.c` is in the same directory as the other .c files and execute `main
 
 After launching the program, you should find yourself in front of a list of orders, enter the order number in order to use it. 
 
-All commands require the creation of a CDataframe, we recommend that you create it directly by executing command 1 from the start.
+All commands require the creation of a CDataframe, we recommend that you create it directly by executing command n°**1** from the start.
 
 Our program uses dynamic arrays and is capable of performing the following commands:
 
