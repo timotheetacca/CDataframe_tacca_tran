@@ -60,7 +60,6 @@ int main() {
                 }
                 else{
                     fill_cdataframe(cdataframe);
-                    printf("\nA CDATAFRAME has been hard-filled\n");
                 }
                 break;
 
@@ -70,6 +69,7 @@ int main() {
                 }
                 else{
                     hard_fill(cdataframe);
+                    printf("\nA CDATAFRAME has been hard-filled\n");
                 }
                 break;
 
