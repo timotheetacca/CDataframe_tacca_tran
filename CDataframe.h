@@ -11,6 +11,7 @@ typedef struct {
 CDATAFRAME* create_cdataframe();
 void delete_cdataframe(CDATAFRAME* cdataframe);
 void fill_cdataframe(CDATAFRAME* cdataframe);
+void hard_fill(CDATAFRAME* cdataframe);
 void display_cdataframe(CDATAFRAME* cdataframe);
 void display_limited_rows_cdataframe(CDATAFRAME* cdataframe, int start, int end);
 void display_limited_columns_cdataframe(CDATAFRAME* cdataframe, int start, int end);
