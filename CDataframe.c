@@ -203,7 +203,7 @@ void hard_fill(CDATAFRAME* cdataframe){
                 char value[5]="aaaa",new_value[5];
                 for (int j = 0; j < cdataframe->number_rows; j++) {
                     for (int k = 0; k < 4; k++) {
-                        new_value[k]=++value[k];
+                        new_value[k]=value[k]++;
                     }
                     new_value[4] = '\0';
                     insert_value(cdataframe->columns[i], &new_value);
