@@ -135,7 +135,6 @@ int main() {
                     printf("Enter a column number :");
                     scanf("%d", &cdataframe_index_1);
                     delete_row_from_cdataframe( cdataframe, cdataframe_index_1);
-                    printf("\nA row has been deleted\n");
                 }
                 break;
 
@@ -160,7 +159,6 @@ int main() {
                     printf("Enter a column number :");
                     scanf("%d", &cdataframe_index_1);
                     delete_column_from_cdataframe( cdataframe, cdataframe_index_1);
-                    printf("\nA column has been deleted\n");
                 }
                 break;
 

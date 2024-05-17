@@ -203,7 +203,7 @@ void hard_fill(CDATAFRAME* cdataframe){
                 char value[5]="aaaa",new_value[5];
                 for (int j = 0; j < cdataframe->number_rows; j++) {
                     for (int k = 0; k < 4; k++) {
-                        new_value[k]=++value[k];
+                        new_value[k]=value[k]++;
                     }
                     new_value[4] = '\0';
                     insert_value(cdataframe->columns[i], &new_value);
@@ -266,7 +266,7 @@ void add_row_to_cdataframe(CDATAFRAME* cdataframe) {
         switch (cdataframe->columns[i]->column_type) {
             case NULLVAL:{
                 insert_value(cdataframe->columns[i], NULL);
-                printf(" NULL (Has been automatically added) ");
+                printf(" NULL (Has been automatically added)\n");
                 break;
             }
             case UINT: {
@@ -333,6 +333,7 @@ void delete_row_from_cdataframe(CDATAFRAME* cdataframe, int row) {
     if (cdataframe->number_rows<=0){
         delete_cdataframe(cdataframe);
     }
+    printf("\nA row has been deleted\n");
 }
 
 void add_column_to_cdataframe(CDATAFRAME* cdataframe){
@@ -421,6 +422,7 @@ void delete_column_from_cdataframe(CDATAFRAME* cdataframe, int column){
     if (cdataframe->number_columns<=0){
         delete_cdataframe(cdataframe);
     }
+    printf("\nA column has been deleted\n");
 }
 
 void rename_column(CDATAFRAME* cdataframe, int column, char* new_title){
