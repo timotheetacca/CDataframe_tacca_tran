@@ -521,9 +521,10 @@ void display_number_of_columns(CDATAFRAME* cdataframe) {
 }
 
 void display_name_of_columns(CDATAFRAME* cdataframe) {
-    for (int i = 0; i < cdataframe->number_columns; i++) {
-        printf("Title of column %d: %s\n", i, cdataframe->columns[i]->title);
+    for (int i = 0; i < cdataframe->number_columns; ++i) {
+        printf("\nTitle of column %d: %s", i, cdataframe->columns[i]->title);
     }
+    printf("\n");
 }
 
 int count_cells_condition(CDATAFRAME* cdataframe, ENUM_TYPE x_type, void* x, char op){

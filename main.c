@@ -450,7 +450,7 @@ int main() {
                             break;
                     }
                     if(data_type!=NULLVAL){
-                        printf("\n1- equal to (=)\n2- greater than (>)\n3- less than (<)\nChoose one operator:");
+                        printf("\n1-Equal to (=)\n2-Greater than (>)\n3-Less than (<)\nChoose one operator:");
                         scanf("%d", &op_choice);
                         switch (op_choice){
                             case 1:
@@ -482,7 +482,7 @@ int main() {
                 }
                 else {
                     int sort_dir, dir_choice;
-                    printf("Enter a column number :");
+                    printf("\nEnter a column number :");
                     scanf("%d", &cdataframe_index_1);
                     printf("\n1-Ascending order\n2-Descending order\nChoose the order you want to sort in:");
                     scanf("%d",&dir_choice);
