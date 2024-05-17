@@ -233,12 +233,12 @@ void display_limited_rows_cdataframe(CDATAFRAME* cdataframe, int start, int end)
         for (int j = start; j <= end; j++) {
             if (j < cdataframe->columns[i]->size) {
                 printf("[%d] ", j);
-                if (cdataframe->columns[i]->data[i] == NULL) {
+                if (cdataframe->columns[i]->data[j] == NULL) {
                     printf("NULL\n");
                 }
                 else {
                     char str[100];
-                    convert_value(cdataframe->columns[i], i, str, sizeof(str));
+                    convert_value(cdataframe->columns[i], j, str, sizeof(str));
                     printf("%s\n", str);
 
                 }
