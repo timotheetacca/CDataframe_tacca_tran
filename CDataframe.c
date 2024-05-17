@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "CDataframe.h"
 #define INITIAL_COLUMNS 8
 
@@ -440,7 +441,7 @@ int check_if_value_exists_in_cdataframe(CDATAFRAME* cdataframe, ENUM_TYPE value_
             for (int j = 0; j < cdataframe->number_rows; j++) {
                 switch (value_type) {
                     case NULLVAL:
-                            printf("NULLVALL is not supported\n");
+                        return 0;
                         break;
                     case UINT:
                         if (*((unsigned int*)cdataframe->columns[i]->data[j]) == *((unsigned int*)value))
@@ -493,7 +494,21 @@ void replace_value(CDATAFRAME* cdataframe, int column, int row, ENUM_TYPE value_
         printf("Incompatible data types. The value can't be replaced\n");
         return;
     }
-    cdataframe->columns[column]->data[row]=new_val;
+    if (value_type == STRING) {
+        if (cdataframe->columns[column]->data[row] != NULL) {
+            char str[100];
+            convert_value(cdataframe->columns[column], row, str, sizeof(str));
+            free(cdataframe->columns[column]->data[row]);
+        }
+
+        cdataframe->columns[column]->data[row] = (char *) malloc((strlen((char *) new_val) + 1)*sizeof(char));
+        strcpy((char *) cdataframe->columns[column]->data[row], (char *) new_val);
+        char str[100];
+        convert_value(cdataframe->columns[column], row, str, sizeof(str));
+    }
+    else {
+        cdataframe->columns[column]->data[row] = new_val;
+    }
 }
 
 void display_number_of_rows(CDATAFRAME* cdataframe) {
@@ -518,7 +533,6 @@ int count_cells_condition(CDATAFRAME* cdataframe, ENUM_TYPE x_type, void* x, cha
             for (int j = 0; j < cdataframe->columns[i]->size; j++) {
                 switch (x_type) {
                     case NULLVAL:
-                        printf("NULLVALL is not supported\n");
                         break;
                     case UINT:
                         if (op == '=' && *((unsigned int*)cdataframe->columns[i]->data[j]) == *((unsigned int*)x))

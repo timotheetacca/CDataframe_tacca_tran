@@ -254,10 +254,13 @@ int main() {
                             break;
                     }
                     if(check_if_value_exists_in_cdataframe(cdataframe, data_type, val_check_cdataframe)==1){
-                        printf("Value exist in the CDataframe\n");
+                        printf("\nValue exist in the CDataframe\n");
                     }
                     else if(check_if_value_exists_in_cdataframe(cdataframe, data_type, val_check_cdataframe)==-1){
-                        printf("Value does not exist in the CDataframe\n");
+                        printf("\nValue does not exist in the CDataframe\n");
+                    }
+                    else if(check_if_value_exists_in_cdataframe(cdataframe, data_type, val_check_cdataframe)==0){
+                        printf("\nCan't use this function with NULLVAL\n");
                     }
                 }
                 break;
@@ -270,13 +273,13 @@ int main() {
                     printf("\n\nTo use this function you need to create have at least 1 column in your CDATAFRAME, which you can do using command number 2,3 or 9\n");
                 }
                 else {
-                    printf("Enter a column number :");
+                    printf("\nEnter a column number :");
                     scanf("%d", &cdataframe_index_1);
                     printf("Enter a row number :");
                     scanf("%d", &cdataframe_index_2);
                     convert_value(cdataframe->columns[cdataframe_index_1], cdataframe_index_2, string,
                                   cdataframe->columns[cdataframe_index_1]->size);
-                    printf("%s\n", string);
+                    printf("\n%s\n[%d] %s\n",cdataframe->columns[cdataframe_index_1]->title ,cdataframe_index_2, string);
                 }
                 break;
 
@@ -288,7 +291,7 @@ int main() {
                     printf("\n\nTo use this function you need to create have at least 1 column in your CDATAFRAME, which you can do using command number 2,3 or 9\n");
                 }
                 else {
-                    printf("Enter a column number :");
+                    printf("\nEnter a column number :");
                     scanf("%d", &cdataframe_index_1);
                     printf("Enter a row number :");
                     scanf("%d", &cdataframe_index_2);
@@ -296,59 +299,56 @@ int main() {
                     void* new_value;
                     switch (value_type) {
                         case NULLVAL :{
-                            printf("NULLVAL type is not supported\n");
+                            printf("Can't use this function with NULLVAL\n");
                             break;
                         }
                         case UINT :{
-                            unsigned int new_uint_value;
+                            new_value = (unsigned int *) malloc(sizeof(unsigned int));
                             printf("Enter a new unsigned integer value :");
-                            scanf("%u", &new_uint_value);
-                            new_value = malloc(sizeof(unsigned int));
-                            *((unsigned int*)new_value) = new_uint_value;
+                            scanf("%lf", new_value);
+                            printf("\nA value has been replaced\n");
                             break;
                         }
                         case INT :{
-                            int new_int_value;
-                            printf("Enter a new integer value :");
-                            scanf("%d", &new_int_value);
-                            new_value = malloc(sizeof(int));
-                            *((int*)new_value) = new_int_value;
+                            new_value = (int *) malloc(sizeof(int));
+                            printf("Enter a new int value :");
+                            scanf("%d", new_value);
+                            printf("\nA value has been replaced\n");
                             break;
                         }
                         case CHAR :{
                             char new_char_value;
-                            printf("Enter a new character value :");
-                            scanf(" %c", &new_char_value);
-                            new_value = malloc(sizeof(char));
-                            *((char*)new_value) = new_char_value;
+                            new_value = (char *) malloc(sizeof(char));
+                            printf("Enter a new char value :");
+                            scanf("%c", new_value);
+                            printf("\nA value has been replaced\n");
                             break;
                         }
                         case FLOAT :{
-                            float new_float_value;
+                            new_value = (float *) malloc(sizeof(float));
                             printf("Enter a new float value :");
-                            scanf("%f", &new_float_value);
-                            new_value = malloc(sizeof(float));
-                            *((float*)new_value) = new_float_value;
+                            scanf("%f", new_value);
+                            printf("\nA value has been replaced\n");
                             break;
                         }
                         case DOUBLE :{
-                            double new_double_value;
+                            new_value = (double *) malloc(sizeof(double));
                             printf("Enter a new double value :");
-                            scanf("%lf", &new_double_value);
-                            new_value = malloc(sizeof(double));
-                            *((double*)new_value) = new_double_value;
+                            scanf("%lf", new_value);
+                            printf("\nA value has been replaced\n");
                             break;
                         }
                         case STRING :{
-                            char* new_string_value = (char*)malloc(sizeof(char) * 100);
+                            new_value = (char*) malloc(sizeof(char) * 100);
                             printf("Enter a new string value :");
-                            scanf("%s", new_string_value);
-                            new_value = new_string_value;
+                            scanf("%s", new_value);
+                            printf("\nA value has been replaced\n");
                             break;
                         }
                     }
                     replace_value(cdataframe, cdataframe_index_1, cdataframe_index_2, value_type, new_value);
-                    printf("\nA value has been replaced\n");
+                    free(new_value);
+
                 }
                 break;
 
@@ -395,12 +395,12 @@ int main() {
                     scanf("%d", (int *) &data_type);
                     switch (data_type) {
                         case NULLVAL:{
-                            printf("Can't operate comparisons with NULL values\n");
+                            printf("Can't use this function with NULLVAL\n");
                             break;
                         }
                         case UINT :{
                             unsigned int uint_value;
-                            printf("Enter x (an unsigned integer) :");
+                            printf("Enter an unsigned integer :");
                             scanf("%u", &uint_value);
                             value_to_compare = malloc(sizeof(unsigned int));
                             *((unsigned int *) value_to_compare) = uint_value;
@@ -408,7 +408,7 @@ int main() {
                         }
                         case INT :{
                             int int_value;
-                            printf("Enter x (an integer) :");
+                            printf("Enter an integer :");
                             scanf("%d", &int_value);
                             value_to_compare = malloc(sizeof(int));
                             *((int *) value_to_compare) = int_value;
@@ -416,7 +416,7 @@ int main() {
                         }
                         case CHAR :{
                             char char_value;
-                            printf("Enter x (a character) :");
+                            printf("Enter a character :");
                             scanf(" %c", &char_value);
                             value_to_compare = malloc(sizeof(char));
                             *((char *) value_to_compare) = char_value;
@@ -424,7 +424,7 @@ int main() {
                         }
                         case FLOAT :{
                             float float_value;
-                            printf("Enter x (a float) :");
+                            printf("Enter a float :");
                             scanf("%f", &float_value);
                             value_to_compare = malloc(sizeof(float));
                             *((float *) value_to_compare) = float_value;
@@ -432,7 +432,7 @@ int main() {
                         }
                         case DOUBLE :{
                             double double_value;
-                            printf("Enter x (a double) :");
+                            printf("Enter a double :");
                             scanf("%lf", &double_value);
                             value_to_compare = malloc(sizeof(double));
                             *((double *) value_to_compare) = double_value;
@@ -440,7 +440,7 @@ int main() {
                         }
                         case STRING :{
                             char *string_value = (char *) malloc(sizeof(char) * 100);
-                            printf("Enter x (a string) :");
+                            printf("Enter a string :");
                             scanf("%s", string_value);
                             value_to_compare = string_value;
                             break;
@@ -452,19 +452,18 @@ int main() {
                     if(data_type!=NULLVAL){
                         printf("\n1- equal to (=)\n2- greater than (>)\n3- less than (<)\nChoose one operator:");
                         scanf("%d", &op_choice);
-                        // Need to handle errors
                         switch (op_choice){
                             case 1:
                                 op = '=';
-                                printf("There is %d values equal to x\n", count_cells_condition(cdataframe, data_type, value_to_compare, op), op);
+                                printf("There is %d values equal to the chosen value\n", count_cells_condition(cdataframe, data_type, value_to_compare, op), op);
                                 break;
                             case 2:
                                 op = '>';
-                                printf("There is %d values greater than x\n", count_cells_condition(cdataframe, data_type, value_to_compare, op), op);
+                                printf("There is %d values greater than the chosen value\n", count_cells_condition(cdataframe, data_type, value_to_compare, op), op);
                                 break;
                             case 3:
                                 op = '<';
-                                printf("There is %d values less than x\n", count_cells_condition(cdataframe, data_type, value_to_compare, op), op);
+                                printf("There is %d values less than the chosen value\n", count_cells_condition(cdataframe, data_type, value_to_compare, op), op);
                                 break;
                             default:
                                 printf("Invalid choice\n");
@@ -485,7 +484,7 @@ int main() {
                     int sort_dir, dir_choice;
                     printf("Enter a column number :");
                     scanf("%d", &cdataframe_index_1);
-                    printf("\n1- Ascending order\n2- Descending order\nChoose the order you want to sort in:");
+                    printf("\n1-Ascending order\n2-Descending order\nChoose the order you want to sort in:");
                     scanf("%d",&dir_choice);
                     switch(dir_choice){
                         case 1:
