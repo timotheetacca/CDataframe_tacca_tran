@@ -262,8 +262,13 @@ void add_row_to_cdataframe(CDATAFRAME* cdataframe) {
     for (int i = 0; i < cdataframe->number_columns; i++) {
         void *value;
         cdataframe->columns[i]->valid_index = -1;
-        printf("Enter the element of type %u for column '%s' row number %d:", cdataframe->columns[i]->column_type, cdataframe->columns[i]->title, (cdataframe->number_rows));
+        printf("\nEnter the element of type %u for column '%s' row number %d:", cdataframe->columns[i]->column_type, cdataframe->columns[i]->title, (cdataframe->number_rows));
         switch (cdataframe->columns[i]->column_type) {
+            case NULLVAL:{
+                insert_value(cdataframe->columns[i], NULL);
+                printf(" NULL (Has been automatically added) ");
+                break;
+            }
             case UINT: {
                 unsigned int *val = malloc(sizeof(unsigned int));
                 scanf("%u", val);
