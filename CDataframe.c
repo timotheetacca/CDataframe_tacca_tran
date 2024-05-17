@@ -201,7 +201,6 @@ void hard_fill(CDATAFRAME* cdataframe){
                 column_type = STRING;
                 cdataframe->columns[i] = create_column(column_type, title);
                 char value[5]="aaaa",new_value[5];
-                insert_value(cdataframe->columns[i], &value);
                 for (int j = 0; j < cdataframe->number_rows; j++) {
                     for (int k = 0; k < 4; k++) {
                         new_value[k]=++value[k];
