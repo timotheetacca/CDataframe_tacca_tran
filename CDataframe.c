@@ -440,8 +440,7 @@ int check_if_value_exists_in_cdataframe(CDATAFRAME* cdataframe, ENUM_TYPE value_
             for (int j = 0; j < cdataframe->number_rows; j++) {
                 switch (value_type) {
                     case NULLVAL:
-                        if (cdataframe->columns[i]->data[j] == NULL)
-                            return 1;
+                            printf("NULLVALL is not supported\n");
                         break;
                     case UINT:
                         if (*((unsigned int*)cdataframe->columns[i]->data[j]) == *((unsigned int*)value))
@@ -519,7 +518,7 @@ int count_cells_condition(CDATAFRAME* cdataframe, ENUM_TYPE x_type, void* x, cha
             for (int j = 0; j < cdataframe->columns[i]->size; j++) {
                 switch (x_type) {
                     case NULLVAL:
-                        printf("Unsupported type, try again\n");
+                        printf("NULLVALL is not supported\n");
                         break;
                     case UINT:
                         if (op == '=' && *((unsigned int*)cdataframe->columns[i]->data[j]) == *((unsigned int*)x))
