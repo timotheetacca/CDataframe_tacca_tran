@@ -266,7 +266,7 @@ void add_row_to_cdataframe(CDATAFRAME* cdataframe) {
         switch (cdataframe->columns[i]->column_type) {
             case NULLVAL:{
                 insert_value(cdataframe->columns[i], NULL);
-                printf(" NULL (Has been automatically added) ");
+                printf(" NULL (Has been automatically added)\n");
                 break;
             }
             case UINT: {
