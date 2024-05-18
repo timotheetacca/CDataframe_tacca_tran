@@ -15,6 +15,7 @@ int asc_partition(COLUMN *column, int left, int right) {
     int i = left - 1;
     for (int j = left; j <= right; j++) {
         int index = (int)column->index[j];
+        // Loop through the cdataframe depending and swap if the current element is smaller than the pivot
         switch (column->column_type) {
             case NULLVAL:
                 break;
@@ -61,9 +62,11 @@ int asc_partition(COLUMN *column, int left, int right) {
                 return 0;
         }
     }
+    // Swap the element with the element at index i+1
     swap(&column->index[i + 1], &column->index[right]);
     return i + 1;
 }
+
 
 
 void asc_quicksort(COLUMN *column, int left, int right) {
@@ -77,10 +80,14 @@ void asc_quicksort(COLUMN *column, int left, int right) {
 
 void asc_insertionsort(COLUMN *column, int N) {
     int i, j;
+    // Iterate through each element in the column
     for (i = 1; i <= N; i++) {
         j = i - 1;
+        // Store the current and previous indexes
         int temp = (int)column->index[i];
         int index = (int)column->index[j];
+
+        // Loop through cdataframe depending on type, and shift elements to the right
         switch (column->column_type) {
             case NULLVAL:
                 break;
@@ -89,6 +96,7 @@ void asc_insertionsort(COLUMN *column, int N) {
                     column->index[j + 1] = column->index[j];
                     j = j - 1;
                 }
+                break;
             case INT:
                 while (j >= 0 && *(int *)column->data[index] > *(int *)column->data[temp]) {
                     column->index[j + 1] = column->index[j];
@@ -119,17 +127,18 @@ void asc_insertionsort(COLUMN *column, int N) {
                     j = j - 1;
                 }
                 break;
-
             default:
                 return;
-
         }
+        // Insert the element
         column->index[j + 1] = temp;
     }
 }
 
 
+
 int desc_partition(COLUMN *column, int left, int right){
+    // Partition swap in descending order
     int pivot_index = column->index[right];
     int i = left - 1;
     for (int j = left; j < right; j++) {
@@ -185,6 +194,7 @@ int desc_partition(COLUMN *column, int left, int right){
 }
 
 void desc_quicksort(COLUMN *column, int left, int right){
+    // Quick sort in descending order
     if (left <= right) {
         int pi = desc_partition(column, left, right);
         desc_quicksort(column, left, pi - 1);
@@ -193,6 +203,7 @@ void desc_quicksort(COLUMN *column, int left, int right){
 }
 
 void desc_insertionsort(COLUMN *column, int n){
+    // Insertion sort in descending order
     for (int i = 1; i < n; i++) {
         int j = i - 1;
         int temp = (int)column->index[i];
@@ -245,17 +256,20 @@ void desc_insertionsort(COLUMN *column, int n){
 
 
 void sort(COLUMN *column, int sort_dir) {
+    // Check if the column is sorted ot not
     if (column->valid_index == 1) {
         printf("This column is already sorted\n");
-
-    } else if (column->valid_index == 0) {
+    }
+    // Check if the index is 0 and if it is, quicksort the column
+    else if (column->valid_index == 0) {
         if(sort_dir==0)
             asc_quicksort(column, 0, column->size-1);
         else if(sort_dir==1)
             desc_quicksort(column, 0, column->size-1);
         column->valid_index = 1;
-
-    } else if (column->valid_index == -1) {
+    }
+    // If the index is -1, insertionsort the column
+    else if (column->valid_index == -1) {
         if(sort_dir==0)
             asc_insertionsort(column, column->size);
         else if(sort_dir==1)
@@ -265,6 +279,7 @@ void sort(COLUMN *column, int sort_dir) {
 }
 
 void print_col_by_index(COLUMN *column) {
+    // Print the column based on the index
     for (int i = 0; i < column->size; i++) {
         printf("[%d] ", i);
         char str[100];
@@ -275,6 +290,7 @@ void print_col_by_index(COLUMN *column) {
 }
 
 void erase_index(COLUMN *column) {
+    // Check if the column and its index are not NULL to free it if it's the case
     if (column != NULL && column->index != NULL) {
         free(column->index);
         column->index = NULL;
@@ -283,13 +299,16 @@ void erase_index(COLUMN *column) {
 }
 
 int check_index(COLUMN *column) {
+    // Check if ccolumn and index is NULL
     if (column != NULL && column->index != NULL) {
+        // Return 1 if the index is valid, -1 if it is invalid
         if (column->valid_index == 1) {
             return 1;
         } else {
             return -1;
         }
     } else {
+        // Return 0 f it's NULL
         return 0;
     }
 }
@@ -304,6 +323,7 @@ int search_value_in_column(COLUMN *column, void *value){
             return -1;
         }
         else{
+            // Loop through the column to search for the value depending on the type
             for (int i = 0; i < column->size; i++){
                 ENUM_TYPE column_type=column->column_type;
                 switch (column_type) {

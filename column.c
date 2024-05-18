@@ -126,6 +126,7 @@ void print_col(COLUMN *column) {
     for (int i = 0; i < column->size; i++) {
         printf("[%d] ", i);
 
+        // Print the string NULL if NULL value
         if (column->data[i] == NULL) {
             printf("NULL\n");
         }
