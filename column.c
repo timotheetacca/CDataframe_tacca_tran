@@ -44,7 +44,7 @@ int insert_value(COLUMN *column, void *value) {
                 column->data[column->size] = NULL;
             }
             else
-                *((unsigned int *)column->data[column->size]) = *((unsigned int *)value);
+                column->data[column->size]->uint_value = *((unsigned int *)value);
             break;
         case INT:
             column->data[column->size] = (COL_TYPE *)malloc(sizeof(int));
