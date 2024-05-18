@@ -694,12 +694,12 @@ int count_cells_condition(CDATAFRAME* cdataframe, ENUM_TYPE x_type, void* x, cha
                             count++;
                         else if (op == '<' && *((double*)cdataframe->columns[i]->data[j]) < *((double*)x))
                             count++;
-                        else if (op == '=' && op == '>' && op!='<')
+                        else if (op == '=' && op == '>' && op !='<')
                             printf("Invalid comparison operation\n");
                         break;
 
                     case STRING:{
-                        char *str1 = (char*)cdataframe->columns[i]->data[j];
+                        char *str1 = (char *)cdataframe->columns[i]->data[j]->string_value;
                         char *str2 = x;
                         int index = 0;
                         if (op == '='){
@@ -730,7 +730,7 @@ int count_cells_condition(CDATAFRAME* cdataframe, ENUM_TYPE x_type, void* x, cha
                                 index++;
                             }
                         }
-                        else if (op == '=' && op == '>' && op!='<')
+                        else if (op == '=' && op == '>' && op !='<')
                             printf("Invalid comparison operation\n");
                         break;
                     }
