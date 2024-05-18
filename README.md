@@ -10,29 +10,27 @@ In python, a wide range of functions can be used to import, clean, analyse and v
 
 However, such a library is not available in the C language, which is why in this project we want to offer an alternative by developing a library written in the C language that can be used to implement some of the existing functions of Pandas.
 
-‎ 
+‎
+ 
 
-We decided to separate the project into branches. The `main` branch contains a simple ascii interface, while the `graphic_interface` branch uses special unicode characters and color codes
-
-**⚠ Warning, some terminals are not capable of displaying these unicode characters or color codes, in this case, we invite you to directly use the `main` branch**
-
+The `main` branch contains the most advanced version, while the `part_one` branch uses a CDataframe prototype accepting only int values
 
 ## Download
 
 ### Git clone
-You have 2 options to install our project. You can install the core project using git clone :
+You have 2 options to install our project. You can install the most advanced project using git clone :
 
 ```
 git clone https://github.com/timotheetacca/CDataframe_tacca_tran.git
 ```
-Or git clone the `graphic_interface` branch :
+Or git clone the `part_one` branch :
 ```
-git clone -b graphic_interface https://github.com/timotheetacca/CDataframe_tacca_tran.git
+git clone -b part_one https://github.com/timotheetacca/CDataframe_tacca_tran.git
 ```
 
 ### Install
 
-You can also directly install the latest release of our project from [here](https://github.com/timotheetacca/CDataframe_tacca_tran). Be sure to download the version of the project you want (`graphic_interface` or `main`)
+You can also directly install the latest release of our project from [here](https://github.com/timotheetacca/CDataframe_tacca_tran). Be sure to download the version of the project you want (`part_one` or `main`)
 
 ![download_cd](https://github.com/timotheetacca/CDataframe_tacca_tran/assets/66522009/f9067b4c-72d6-43ac-88a9-c637147a1cb0)
 
@@ -46,7 +44,7 @@ After launching the program, you should find yourself in front of a list of orde
 
 All commands require the creation of a CDataframe, we recommend that you create it directly by executing command n°**1** from the start.
 
-Our program uses dynamic arrays and is capable of performing the following commands:
+Our program uses dynamic arrays and is able of performing the following commands:
 
 * Create a new CDATAFRAME
 
