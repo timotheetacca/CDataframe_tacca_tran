@@ -235,7 +235,7 @@ void hard_fill(CDATAFRAME* cdataframe){
                 title = "STRINGS";
                 column_type = STRING;
                 cdataframe->columns[i] = create_column(column_type, title);
-                char value[3] = "````";
+                char value[4] = "````";
                 // ` is the character juste before 'a' in the ascii table
                 for (int j = 0; j < cdataframe->number_rows; j++) {
                     for (int k = 0; k < 4; k++) {
@@ -602,11 +602,12 @@ void replace_value(CDATAFRAME* cdataframe, int column, int row, ENUM_TYPE value_
         }
 
         // Malloc enough space for the new string with \0 at the end
-        cdataframe->columns[column]->data[row] = (char *) malloc((strlen((char *) new_val) + 1)*sizeof(char));
+        cdataframe->columns[column]->data[row]->string_value = (char *) malloc((strlen((char *) new_val) + 1)*sizeof(char));
         if (cdataframe->columns[column]->data[row] == NULL) {
             return;
         }
-        strcpy((char *) cdataframe->columns[column]->data[row], (char *) new_val);
+        strcpy((char *) cdataframe->columns[column]->data[row]->string_value, (char *) new_val);
+
     }
     else {
         // Directly replace the value
