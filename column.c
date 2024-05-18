@@ -68,7 +68,7 @@ int insert_value(COLUMN *column, void *value) {
                 column->data[column->size] = NULL;
             }
             else
-                *((float *)column->data[column->size]) = *((float *)value);
+                column->data[column->size]->float_value = *(float *)value;
             break;
         case DOUBLE:
             column->data[column->size] = (COL_TYPE *)malloc(sizeof(double));
@@ -76,7 +76,7 @@ int insert_value(COLUMN *column, void *value) {
                 column->data[column->size] = NULL;
             }
             else
-                *((double *)column->data[column->size]) = *((double *)value);
+                column->data[column->size]->double_value = *(double *)value;
             break;
         case STRING: {
             size_t str_len = strlen((char *)value);
