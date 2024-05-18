@@ -162,7 +162,7 @@ int main() {
                     printf("\nTo use this function you need to create have at least 1 column in your CDATAFRAME, which you can do using command number 2,3 or 9\n");
                 }
                 else{
-                    printf("Enter a column number :");
+                    printf("\nEnter a column number :");
                     scanf("%d", &cdataframe_index_1);
                     delete_column_from_cdataframe( cdataframe, cdataframe_index_1);
                 }
@@ -176,7 +176,7 @@ int main() {
                     printf("\nTo use this function you need to create have at least 1 column in your CDATAFRAME, which you can do using command number 2,3 or 9\n");
                 }
                 else {
-                    printf("Enter a column number :");
+                    printf("\nEnter a column number :");
                     scanf("%d", &cdataframe_index_1);
                     printf("Enter the new title of column %d :", cdataframe_index_1);
                     scanf("%s", string);
@@ -512,7 +512,7 @@ int main() {
                     printf("\nTo use this function you need to create have at least 1 column in your CDATAFRAME, which you can do using command number 2,3 or 9\n");
                 }
                 else {
-                    printf("Enter a column number :");
+                    printf("\nEnter a column number :");
                     scanf("%d", &cdataframe_index_1);
                     print_col_by_index(cdataframe->columns[cdataframe_index_1]);
                 }
@@ -526,7 +526,7 @@ int main() {
                     printf("\nTo use this function you need to create have at least 1 column in your CDATAFRAME, which you can do using command number 2,3 or 9\n");
                 }
                 else {
-                    printf("Enter a column number :");
+                    printf("\nEnter a column number :");
                     scanf("%d", &cdataframe_index_1);
                     erase_index(cdataframe->columns[cdataframe_index_1]);
                     if (cdataframe->columns[0]->index == NULL) {
@@ -546,7 +546,7 @@ int main() {
                     printf("\nTo use this function you need to create have at least 1 column in your CDATAFRAME, which you can do using command number 2,3 or 9\n");
                 }
                 else {
-                    printf("Enter a column number :");
+                    printf("\nEnter a column number :");
                     scanf("%d", &cdataframe_index_1);
                     int index_status = check_index(cdataframe->columns[cdataframe_index_1]);
                     if (index_status == 1) {
@@ -601,7 +601,7 @@ int main() {
                 }
                 else{
                     COLUMN *column;
-                    printf("Enter a column number :");
+                    printf("\nEnter a column number :");
                     scanf("%d", &cdataframe_index_1);
                     column=cdataframe->columns[cdataframe_index_1];
                     ENUM_TYPE column_type=column->column_type;
