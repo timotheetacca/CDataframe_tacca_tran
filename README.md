@@ -13,18 +13,17 @@ However, such a library is not available in the C language, which is why in this
 ‎
  
 
-We decided to separate the project into branches. The `main` branch contains the most advanced version, while the `part_one` branch uses a CDataframe prototype accepting only int values
-
+The `main` branch contains the most advanced version, while the `part_one` branch uses a CDataframe prototype accepting only int values
 
 ## Download
 
 ### Git clone
-You have 2 options to install our project. You can install the core project using git clone :
+You have 2 options to install our project. You can install the most advanced project using git clone :
 
 ```
 git clone https://github.com/timotheetacca/CDataframe_tacca_tran.git
 ```
-Or git clone the `graphic_interface` branch :
+Or git clone the `part_one` branch :
 ```
 git clone -b part_one https://github.com/timotheetacca/CDataframe_tacca_tran.git
 ```
