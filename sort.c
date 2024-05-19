@@ -1,15 +1,18 @@
+// CDataframe TACCA - TRAN    Create the main functions to handle the sorting of the CDataframe's columns
 #include "column.h"
 #include "sort.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
+// Swaps two elements; no return as it directly modifies memory addresses
 void swap(unsigned long long int *a, unsigned long long int *b){
     int temp = *a;
     *a = *b;
     *b = temp;
 }
 
+// Partitions the column for ascending quicksort; no return as it modifies the column
 int asc_partition(COLUMN *column, int left, int right) {
     int pivot_index = column->index[right];
     int i = left - 1;
@@ -67,8 +70,7 @@ int asc_partition(COLUMN *column, int left, int right) {
     return i + 1;
 }
 
-
-
+// Sorts the column in ascending order using quicksort; no return as it sorts the array
 void asc_quicksort(COLUMN *column, int left, int right) {
     if (left <= right) {
         int pi = asc_partition(column, left, right);
@@ -77,7 +79,7 @@ void asc_quicksort(COLUMN *column, int left, int right) {
     }
 }
 
-
+// Sorts the column in ascending order using insertionsort; no return as it sorts the array
 void asc_insertionsort(COLUMN *column, int N) {
     int i, j;
     // Iterate through each element in the column
@@ -135,8 +137,7 @@ void asc_insertionsort(COLUMN *column, int N) {
     }
 }
 
-
-
+// Partitions the column for descending quicksort; no return as it modifies the column
 int desc_partition(COLUMN *column, int left, int right){
     // Partition swap in descending order
     int pivot_index = column->index[right];
@@ -193,6 +194,7 @@ int desc_partition(COLUMN *column, int left, int right){
     return i + 1;
 }
 
+// Sorts the column in descending order using quicksort; no return as it sorts the array
 void desc_quicksort(COLUMN *column, int left, int right){
     // Quick sort in descending order
     if (left <= right) {
@@ -202,6 +204,7 @@ void desc_quicksort(COLUMN *column, int left, int right){
     }
 }
 
+// Sorts the column in descending order using insertionsort; no return as it sorts the array
 void desc_insertionsort(COLUMN *column, int n){
     // Insertion sort in descending order
     for (int i = 1; i < n; i++) {
@@ -254,7 +257,7 @@ void desc_insertionsort(COLUMN *column, int n){
     }
 }
 
-
+// Sorts the column based on the specified direction; no return as it sorts the array (or not)
 void sort(COLUMN *column, int sort_dir) {
     // Check if the column is sorted ot not
     if (column->valid_index == 1) {
@@ -278,6 +281,7 @@ void sort(COLUMN *column, int sort_dir) {
     }
 }
 
+// Prints the column based on the index; no return as it only prints the contents
 void print_col_by_index(COLUMN *column) {
     // Print the column based on the index
     for (int i = 0; i < column->size; i++) {
@@ -289,6 +293,7 @@ void print_col_by_index(COLUMN *column) {
     }
 }
 
+// Erases the index of the column; no return as it directly modifies the given CDataframe
 void erase_index(COLUMN *column) {
     // Check if the column and its index are not NULL to free it if it's the case
     if (column != NULL && column->index != NULL) {
@@ -298,6 +303,7 @@ void erase_index(COLUMN *column) {
     }
 }
 
+// Checks if the column's index is valid; returns 1 if valid, -1 if invalid, 0 if NULL
 int check_index(COLUMN *column) {
     // Check if ccolumn and index is NULL
     if (column != NULL && column->index != NULL) {
@@ -313,10 +319,12 @@ int check_index(COLUMN *column) {
     }
 }
 
+// Updates the index of the column; no return as it sorts the array (or not)
 void update_index(COLUMN *column, int sort_dir) {
     asc_insertionsort(column, column->size);
 }
 
+// Searches for a value in the column; returns 1 if value found, -1 if index is not valid, 0 if value not found, -2 if unsupported type
 int search_value_in_column(COLUMN *column, void *value){
     if (column != NULL && column->index != NULL) {
         if(column->valid_index != 1){

@@ -1,9 +1,11 @@
+// CDataframe TACCA - TRAN    Create the main functions to handle the columns of the CDataframe
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "column.h"
 #define REALLOC_SIZE 256
 
+// Create a new column with the specified type and title; returns a pointer to the newly created column
 COLUMN *create_column(ENUM_TYPE type, char *title) {
     COLUMN *column = (COLUMN *)malloc(sizeof(COLUMN));
     column->title = title;
@@ -17,7 +19,7 @@ COLUMN *create_column(ENUM_TYPE type, char *title) {
     return column;
 }
 
-
+// Inserts a new value into the column; returns 1 if successful, 0 if memory allocation fails
 int insert_value(COLUMN *column, void *value) {
     // Check if the logical size has reached the maximum size
     if (column->size == column->max_size) {
@@ -92,7 +94,7 @@ int insert_value(COLUMN *column, void *value) {
     return 1;
 }
 
-
+// Converts the value at index 'i' in the column to a string and stores it in 'str'; no return as the result is stored in 'str'
 void convert_value(COLUMN *column, unsigned long long int i, char *str, int size) {
     switch(column->column_type) {
         case NULLVAL:
@@ -122,6 +124,7 @@ void convert_value(COLUMN *column, unsigned long long int i, char *str, int size
     }
 }
 
+// Prints the content of the column; no return as the function only displays information
 void print_col(COLUMN *column) {
     for (int i = 0; i < column->size; i++) {
         printf("[%d] ", i);

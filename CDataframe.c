@@ -1,9 +1,11 @@
+// CDataframe TACCA - TRAN    Create the main functions to handle the CDataframe and perform actions to the column or the overall CDataframe
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "CDataframe.h"
 #define INITIAL_COLUMNS 8
 
+// Allocates and initializes a new CDataframe structure; returns a pointer to the CDataframe or 0 if memory allocation fails
 CDATAFRAME* create_cdataframe() {
     // Allocate memory for the CDataframe structure
     CDATAFRAME *cdataframe = (CDATAFRAME *) malloc(sizeof(CDATAFRAME));
@@ -24,6 +26,7 @@ CDATAFRAME* create_cdataframe() {
     return cdataframe;
 }
 
+// Frees all allocated memory for the CDataframe and its columns sets the pointer to NULL; no return as it directly modifies the given CDataframe
 void delete_cdataframe(CDATAFRAME* cdataframe) {
     // Check if dataframe exist
     if (cdataframe == NULL) {
@@ -51,7 +54,7 @@ void delete_cdataframe(CDATAFRAME* cdataframe) {
     cdataframe = NULL;
 }
 
-
+// Fills the CDataframe with user defined columns and rows; no return as it directly modifies the given CDataframe
 void fill_cdataframe(CDATAFRAME* cdataframe) {
     printf("Enter the number of columns in the dataframe:");
     scanf("%d", &cdataframe->number_columns);
@@ -149,6 +152,7 @@ void fill_cdataframe(CDATAFRAME* cdataframe) {
 }
 
 
+// Hard fills the CDataframe with 7 columns of predefined types and values; no return as it directly modifies the given CDataframe
 void hard_fill(CDATAFRAME* cdataframe){
     cdataframe->number_columns=7;
     cdataframe->number_rows=7;
@@ -250,7 +254,7 @@ void hard_fill(CDATAFRAME* cdataframe){
     }
 }
 
-
+// Displays the entire CDataframe; no return as it only prints the contents
 void display_cdataframe(CDATAFRAME* cdataframe) {
     for (int i = 0; i < cdataframe->number_columns; i++) {
         // Print the content of each column
@@ -260,6 +264,7 @@ void display_cdataframe(CDATAFRAME* cdataframe) {
     }
 }
 
+// Displays specified rows from the CDataframe within a given range; no return as it only prints the contents
 void display_limited_rows_cdataframe(CDATAFRAME* cdataframe, int start, int end) {
     // Check if the indexes are valid
     if (start < 0 || start >= cdataframe->number_rows || end < 0 || end >= cdataframe->number_rows || start > end) {
@@ -288,6 +293,7 @@ void display_limited_rows_cdataframe(CDATAFRAME* cdataframe, int start, int end)
     }
 }
 
+// Displays specified columns from the CDataframe within a given range; no return as it only prints the contents
 void display_limited_columns_cdataframe(CDATAFRAME* cdataframe, int start, int end) {
     // Check if the indexes are valid
     if (start < 0 || start >= cdataframe->number_columns || end < 0 || end >= cdataframe->number_columns || start > end) {
@@ -302,6 +308,7 @@ void display_limited_columns_cdataframe(CDATAFRAME* cdataframe, int start, int e
 }
 
 
+// Adds a new row to the CDataframe with user input values; no return as it directly modifies the CDataframe
 void add_row_to_cdataframe(CDATAFRAME* cdataframe) {
     // Loop through each column to add a row
     for (int i = 0; i < cdataframe->number_columns; i++) {
@@ -381,7 +388,7 @@ void add_row_to_cdataframe(CDATAFRAME* cdataframe) {
     cdataframe->number_rows++;
 }
 
-
+// Deletes a specified row from the CDataframe; no return as it directly modifies the CDataframe
 void delete_row_from_cdataframe(CDATAFRAME* cdataframe, int row) {
     // Check if the index is valid
     if (row < 0 || row >= cdataframe->number_rows){
@@ -412,6 +419,7 @@ void delete_row_from_cdataframe(CDATAFRAME* cdataframe, int row) {
     printf("\nA row has been deleted\n");
 }
 
+// Adds a new column to the CDataframe with user-defined title and type; no return as it directly modifies the CDataframe
 void add_column_to_cdataframe(CDATAFRAME* cdataframe){
     ENUM_TYPE column_type;
     char *title = (char *) malloc(sizeof(char) * 100);
@@ -496,7 +504,7 @@ void add_column_to_cdataframe(CDATAFRAME* cdataframe){
 
 }
 
-
+// Deletes a specified column from the CDataframe; no return as it directly modifies the CDataframe
 void delete_column_from_cdataframe(CDATAFRAME* cdataframe, int column){
     // Check if the index is valid
     if (column < 0 || column >= cdataframe->number_columns){
@@ -521,6 +529,7 @@ void delete_column_from_cdataframe(CDATAFRAME* cdataframe, int column){
     printf("\nA column has been deleted\n");
 }
 
+// Renames a specified column in the CDataframe; no return as it directly modifies the CDataframe
 void rename_column(CDATAFRAME* cdataframe, int column, char* new_title){
     // Check if the index is valid
     if (column < 0 || column >= cdataframe->number_columns) {
@@ -530,6 +539,7 @@ void rename_column(CDATAFRAME* cdataframe, int column, char* new_title){
     cdataframe->columns[column]->title = new_title;
 }
 
+// Checks if a value of a specific type exists in the CDataframe; returns 1 if found, -1 if not found, -2 for unsupported types
 int check_if_value_exists_in_cdataframe(CDATAFRAME* cdataframe, ENUM_TYPE value_type, void* value) {
     // Returns 1 if the value exist in the CDataframe, else returns -1
     for (int i = 0; i < cdataframe->number_columns; i++) {
@@ -583,6 +593,7 @@ int check_if_value_exists_in_cdataframe(CDATAFRAME* cdataframe, ENUM_TYPE value_
     return -1;
 }
 
+// Replaces a value in the CDataframe at a specified column and row with a new value; no return as it directly modifies the CDataframe
 void replace_value(CDATAFRAME* cdataframe, int column, int row, ENUM_TYPE value_type, void* new_val) {
     // Check if the indexes are valid
     if ((column < 0 || column >= cdataframe->number_columns) || (row < 0 || row >= cdataframe->number_rows)){
@@ -615,15 +626,17 @@ void replace_value(CDATAFRAME* cdataframe, int column, int row, ENUM_TYPE value_
     }
 }
 
+// Displays the number of rows in the CDataframe; no return as the function only displays information
 void display_number_of_rows(CDATAFRAME* cdataframe) {
     printf("Number of rows: %d\n", cdataframe->number_rows);
 }
 
-
+// Displays the number of columns in the CDataframe; no return as the function only displays information
 void display_number_of_columns(CDATAFRAME* cdataframe) {
     printf("Number of columns: %d\n", cdataframe->number_columns);
 }
 
+// Displays the titles of all columns in the CDataframe; no return as the function only displays information
 void display_name_of_columns(CDATAFRAME* cdataframe) {
     for (int i = 0; i < cdataframe->number_columns; ++i) {
         printf("\nTitle of column %d: %s", i, cdataframe->columns[i]->title);
@@ -631,6 +644,7 @@ void display_name_of_columns(CDATAFRAME* cdataframe) {
     printf("\n");
 }
 
+// Counts cells in the CDataframe that meet a condition based on a specified type, value, and operator; returns the count of cells
 int count_cells_condition(CDATAFRAME* cdataframe, ENUM_TYPE x_type, void* x, char op){
     int count = 0;
     for (int i = 0; i < cdataframe->number_columns; i++) {

@@ -1,3 +1,4 @@
+// CDataframe TACCA - TRAN    Interaction with the user and main usage of the functions
 #include "column.h"
 #include "CDataframe.h"
 #include "sort.h"
@@ -6,6 +7,8 @@
 #define ASC 0
 #define DESC 1
 
+
+// Print all the functions available; no return as the function only displays information
 void print_function_table() {
     printf("\n\n1  - Create a new CDATAFRAME\n");
     printf("2  - Fill a CDATAFRAME with data\n");

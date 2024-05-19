@@ -29,3 +29,4 @@ int count_cells_condition(CDATAFRAME* cdataframe, ENUM_TYPE x_type, void* x, cha
 int search_value_in_column(COLUMN *col, void *val);
 
 #endif
+
