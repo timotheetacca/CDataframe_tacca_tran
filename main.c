@@ -34,7 +34,8 @@ void print_function_table() {
     printf("22 - Check if index exists in a column\n");
     printf("23 - Update index of a column\n");
     printf("24 - Search for a value in a column\n");
-    printf("25 - Leave the program\n");
+    printf("25 - Delete the CDataframe\n");
+    printf("26 - Leave the program\n");
 }
 
 int main() {
@@ -676,8 +677,16 @@ int main() {
                     }
                 }
                 break;
-
             case 25:
+                if (cdataframe==NULL){
+                    printf("\nTo use this function you need to create a CDATAFRAME, which you can do using command number 1\n");
+                }
+                else {
+                    delete_cdataframe(cdataframe);
+                    printf("\nA CDataframe has been deleted\n");
+                }
+                break;
+            case 26:
                 return 0;
 
             default:

@@ -41,7 +41,6 @@ void delete_cdataframe(CDATAFRAME* cdataframe) {
         // Free the elements of each column
         free(cdataframe->columns[i]->data);
         free(cdataframe->columns[i]->index);
-        free(cdataframe->columns[i]->title);
         free(cdataframe->columns[i]);
     }
 
